@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101827">
+<meta name="description" content="ARKの投稿計画、記事作成、note実績、公開前チェックをまとめて管理する無料優先のスマホ対応Webアプリ。">
+<title>ARK COMMAND CENTER v2</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#131e30;--panel2:#1a2940;--text:#f3f6fb;--muted:#a8b5c9;--line:#2a3b55;--accent:#9be7c4;--blue:#b6c8ff;--warn:#ffd68a;--danger:#ffb3b3;--good:#a7f3d0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(160deg,#101a2d,#0b1220 55%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+header{padding:22px 16px 14px;max-width:1000px;margin:auto}.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--accent);font-weight:800}h1{font-size:clamp(24px,6vw,32px);line-height:1.15;margin:7px 0}header p{margin:7px 0;color:var(--muted);font-size:13px}
+nav{display:flex;gap:7px;overflow-x:auto;padding:0 12px 12px;max-width:1000px;margin:auto;scrollbar-width:none;position:sticky;top:0;z-index:5;background:rgba(11,18,32,.94);backdrop-filter:blur(12px)}nav button{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:10px 13px;font-size:13px;font-weight:750;flex:0 0 auto}nav button.active{background:var(--accent);color:#10251c;border-color:var(--accent)}
+main{max-width:1000px;margin:auto;padding:0 12px 34px}.page{display:none}.page.active{display:block}.hero{background:linear-gradient(130deg,#183b3a,#1a2c47);border:1px solid #315d5a;border-radius:18px;padding:17px;margin-bottom:12px}.hero h2{font-size:20px;margin:4px 0 6px}.hero p{margin:0;color:#d5e8e3;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:13px;min-width:0}.stat small,.muted{color:var(--muted);font-size:12px}.stat strong{display:block;font-size:24px;margin-top:5px;overflow-wrap:anywhere}.section-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:17px 2px 9px}.section-title h2{font-size:17px;margin:0}.card h3{font-size:15px;margin:0 0 8px}.field{display:flex;flex-direction:column;gap:5px;margin:10px 0}.field label{font-size:12px;color:var(--muted);font-weight:750}.field input,.field textarea,.field select{width:100%;min-width:0;border:1px solid var(--line);background:#0c1524;color:var(--text);border-radius:10px;padding:11px 12px;font:inherit;font-size:16px}.field textarea{min-height:100px;resize:vertical}.field textarea.large{min-height:260px}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1 1 130px}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:11px 12px;font-size:13px;font-weight:800;cursor:pointer;min-height:42px}.btn.primary{background:var(--accent);color:#10251c;border-color:var(--accent)}.btn.soft{background:transparent}.btn.danger{color:var(--danger)}.btn:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--blue);outline-offset:2px}.item{padding:11px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}.item-title{font-weight:800;font-size:14px}.tag{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:3px 8px;color:var(--muted);font-size:11px;margin:4px 4px 0 0}.checkline{display:flex;gap:9px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.checkline:last-child{border-bottom:0}.checkline input{margin-top:4px;accent-color:var(--accent);width:18px;height:18px;flex:0 0 auto}.notice{font-size:12px;color:var(--muted);background:#101b2c;border-radius:10px;padding:10px;margin-top:10px}.empty{color:var(--muted);font-size:13px;padding:12px 0}.metric-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 9px}.layout{display:grid;gap:12px}.footer{text-align:center;color:#71829b;font-size:11px;padding:10px 16px 25px}.status{font-size:12px;color:var(--good);min-height:1.5em}.pill{font-size:11px;border-radius:99px;padding:3px 8px;background:#22334b;color:var(--blue)}.bar{height:8px;border-radius:9px;background:#25344a;overflow:hidden;margin-top:7px}.bar span{display:block;height:100%;background:var(--accent);width:0}.history-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.history-grid div{background:#0d1727;border-radius:9px;padding:8px}.history-grid b{display:block;font-size:16px}.history-grid small{color:var(--muted);font-size:10px}.hidden{display:none!important}.subtle{font-size:11px;color:var(--muted)}
+@media(min-width:700px){header{padding-top:30px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.layout{grid-template-columns:1.05fr .95fr}.metric-form{grid-template-columns:repeat(3,minmax(0,1fr))}main{padding-left:16px;padding-right:16px}.card{padding:16px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">YOUR AI WORKFLOW · FREE-FIRST</div><h1>ARK COMMAND CENTER</h1><p>企画する。整える。確認する。次の一手を決める。🚀</p></header>
+<nav aria-label="メインメニュー">
+<button class="active" data-page="home">🏠 ホーム</button><button data-page="posts">🗓 投稿予定3本</button><button data-page="editor">✍️ 記事作成・校閲</button><button data-page="analytics">📊 note実績</button><button data-page="legal">⚖️ 法務チェック</button><button data-page="strategy">💡 AI作戦室</button><button data-page="backup">💾 保存・移行</button>
+</nav>
+<main>
+<section id="home" class="page active">
+<div class="hero"><div class="eyebrow">ARK / MOBILE FIRST</div><h2>今日の作戦を、ここから。✨</h2><p>投稿計画・下書き・実績・公開前チェックをひとまとめに管理。入力データはこのブラウザ内に保存できます。</p></div>
+<div class="grid"><div class="stat"><small>投稿予定</small><strong id="statPosts">0 / 3</strong><span class="muted">タイトルまたはテーマ入力済み</span></div><div class="stat"><small>最新インプレッション</small><strong id="statImp">—</strong><span class="muted">最新の記録</span></div><div class="stat"><small>最新PV</small><strong id="statPv">—</strong><span class="muted">最新の記録</span></div><div class="stat"><small>法務確認</small><strong id="statLegal">0%</strong><span class="muted">チェック進捗</span></div></div>
+<div class="layout"><div class="card"><div class="section-title"><h2>📌 ARKチーム</h2></div><div class="item"><div class="item-title">📝 編集部</div><span class="muted">企画・執筆・読みやすさ・校閲</span></div><div class="item"><div class="item-title">📊 分析部</div><span class="muted">noteの数字・傾向・改善案</span></div><div class="item"><div class="item-title">💡 収益部</div><span class="muted">広告・導線・成果の記録</span></div><div class="item"><div class="item-title">⚖️ 法務部</div><span class="muted">規約・PR表示・権利・事実確認</span></div><div class="item"><div class="item-title">🔎 トレンド班</div><span class="muted">話題候補の整理。公開前に最新情報を確認</span></div></div>
+<div class="card"><div class="section-title"><h2>⚡ 次にやること</h2></div><div class="item">1. 投稿候補を3本入力 🗓</div><div class="item">2. 下書きを作って文字数・校閲を確認 ✍️</div><div class="item">3. noteの実績を記録し、前回と比較 📈</div><div class="item">4. 法務チェック後に自分で最終確認 ⚖️</div><div class="notice">このアプリ単体では、noteへの自動投稿・リアルタイム検索・AIによる事実確認は行いません。外部サービスなしで使える無料優先の管理ツールです。</div></div></div>
+</section>
+<section id="posts" class="page">
+<div class="section-title"><h2>🗓 投稿予定3本</h2><button class="btn primary" id="savePosts">保存する</button></div><p class="muted">3本の候補を管理。入力は自動保存され、保存ボタンでも確定できます。</p><div id="postFields"></div>
+<div class="card"><h3>💡 企画の組み合わせ案</h3><div class="item"><b>① 話題・雑学</b><div class="muted">今日は何の日、季節の話題、読んだら誰かに話したくなる豆知識</div></div><div class="item"><b>② 過去記事につながる記事</b><div class="muted">反応がよかった望遠鏡・星空などから関連記事へ自然に誘導</div></div><div class="item"><b>③ 読者の役に立つ実用記事</b><div class="muted">すぐ試せる工夫、暮らしの小さなヒント、防災など</div></div><div class="notice">トレンドはここでは自動取得しません。投稿前に公式発表など信頼できる情報源で日付・数字・内容を確認してください。</div></div>
+</section>
+<section id="editor" class="page">
+<div class="section-title"><h2>✍️ 記事作成・校閲</h2><button class="btn primary" id="saveDraft">下書きを保存</button></div>
+<div class="card"><div class="field"><label for="draftTitle">記事タイトル</label><input id="draftTitle" placeholder="例：知ると誰かに話したくなる秋の雑学"></div><div class="field"><label for="draftBody">記事本文</label><textarea id="draftBody" class="large" placeholder="ここに記事の下書きを貼り付ける…"></textarea></div><div class="row"><button class="btn" id="countText">文字数を確認</button><button class="btn" id="copyDraft">本文をコピー</button><button class="btn" id="exportDraft">下書きを.txt保存</button><button class="btn soft" id="clearDraft">クリア</button></div><p id="draftStatus" class="status" aria-live="polite">下書きはこの端末のブラウザに保存できます。</p></div>
+<div class="card" style="margin-top:12px"><h3>🔎 校閲チェックリスト</h3><div id="proofChecks"></div><div class="notice">チェックリストは確認漏れを減らす補助機能です。事実の正しさや法的な適合を自動保証するものではありません。</div></div>
+</section>
+<section id="analytics" class="page">
+<div class="section-title"><h2>📊 note実績を記録</h2><button class="btn primary" id="saveMetrics">記録する</button></div>
+<div class="card"><p class="muted">日ごとの数値でも、noteの集計期間の数値でも記録できます。集計期間が重なる数字を合算すると誤解につながるため、ホームには最新記録を表示します。</p><div class="field"><label for="metricDate">集計日・期間のラベル</label><input id="metricDate" placeholder="例：2026/10/11 または 9/13〜10/10"></div><div class="metric-form"><div class="field"><label for="metricImp">インプレッション</label><input id="metricImp" type="number" min="0" step="1" inputmode="numeric" placeholder="908"></div><div class="field"><label for="metricPv">ページビュー</label><input id="metricPv" type="number" min="0" step="1" inputmode="numeric" placeholder="91"></div><div class="field"><label for="metricLikes">スキ</label><input id="metricLikes" type="number" min="0" step="1" inputmode="numeric" placeholder="21"></div></div><div class="field"><label for="metricNote">メモ（伸びた記事・投稿など）</label><textarea id="metricNote" placeholder="気づいたこと・よく読まれた記事など…"></textarea></div><p id="metricStatus" class="status" aria-live="polite"></p></div>
+<div class="section-title"><h2>履歴・比較</h2><button class="btn soft" id="exportMetrics">CSVを書き出す</button></div><div class="card" id="metricInsights"><div class="empty">記録すると分析が表示されます。</div></div><div class="card" id="metricHistory" style="margin-top:10px"><div class="empty">まだ記録がありません。</div></div><div class="notice">入力した数値をもとに表示します。noteからの自動取得や、記事別の自動集計は未実装です。</div>
+</section>
+<section id="legal" class="page">
+<div class="section-title"><h2>⚖️ 法務部チェック</h2><button class="btn soft" id="resetLegal">リセット</button></div><div class="hero"><h2>公開前の確認 🛡️</h2><p>すべてにチェックが付いても、法的な安全やプラットフォーム規約への適合を保証するものではありません。</p></div><div class="card"><div id="legalChecks"></div><div class="notice">アフィリエイトを使う場合は、利用するサービス（A8・楽天など）と掲載先SNSの最新規約を個別に確認してください。広告であることが読者に分かる表示も確認します。</div></div>
+</section>
+
+<section id="strategy" class="page">
+  <div class="hero"><div class="eyebrow">ARK STRATEGY ROOM</div><h2>💡 AI作戦室</h2><p>無料で使える「AIへの指示文」を作成。ここで作った指示文をChatGPTなどに貼り付けて活用します。</p></div>
+  <div class="card">
+    <h3>🧭 今回のテーマを入力</h3>
+    <div class="field"><label for="strategyTopic">テーマ・話題</label><input id="strategyTopic" placeholder="例：秋の夜長、星空、防災、今日は何の日"></div>
+    <div class="field"><label for="strategyReader">読者に届けたいこと</label><textarea id="strategyReader" placeholder="例：初心者にもわかりやすく、読んだら誰かに話したくなる雑学"></textarea></div>
+    <div class="field"><label for="strategyGoal">目的</label><select id="strategyGoal"><option value="認知を広げる無料note記事">無料noteで認知を広げる</option><option value="過去記事への自然な導線を作る">過去記事へ自然につなぐ</option><option value="読者の役に立つ実用記事を作る">読者の役に立つ記事</option><option value="広告・アフィリエイトを規約に沿って紹介する">アフィリエイト記事を検討する</option></select></div>
+    <div class="row"><button class="btn primary" id="makeArticlePrompt">✍️ 記事作成指示を作る</button><button class="btn" id="makeTrendPrompt">🔥 トレンド調査指示を作る</button><button class="btn" id="makeAnalysisPrompt">📊 実績分析指示を作る</button></div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <div class="section-title"><h2>📋 生成した指示文</h2><button class="btn" id="copyStrategyPrompt">コピー</button></div>
+    <textarea id="strategyOutput" class="large" placeholder="上のボタンを押すと、AIに貼り付ける指示文がここに表示されます。"></textarea>
+    <p id="strategyStatus" class="status" aria-live="polite"></p>
+    <div class="notice">重要：この機能は指示文を作る補助機能です。アプリ自体がAIを呼び出したり、リアルタイム検索を実行したりするわけではありません。最新情報はAI側で検索を依頼し、公式情報などで確認してください。</div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <h3>🚀 ARKチームの役割</h3>
+    <div class="item"><b>編集部</b><div class="muted">企画・執筆・読みやすさ・過去記事への導線</div></div>
+    <div class="item"><b>分析部</b><div class="muted">表示・PV・スキを比較し、次の改善を提案</div></div>
+    <div class="item"><b>収益部</b><div class="muted">読者に役立つ紹介か、広告表示や条件が明確か確認</div></div>
+    <div class="item"><b>法務部</b><div class="muted">事実・引用・権利・PR表示・掲載先規約を公開前に確認</div></div>
+    <div class="item"><b>トレンド班</b><div class="muted">直近の話題を調べ、日付と一次情報を確認して候補化</div></div>
+  </div>
+</section>
+
+<section id="backup" class="page">
+<div class="section-title"><h2>💾 保存・データ移行</h2></div><div class="card"><h3>この端末に保存</h3><p class="muted">通常の入力はブラウザのローカル保存領域に自動保存されます。ブラウザのデータ削除や端末変更に備えて、バックアップを作成してください。</p><div class="row"><button class="btn primary" id="exportBackup">バックアップを書き出す（JSON）</button><button class="btn" id="importBackupBtn">バックアップを読み込む</button><input id="importBackup" type="file" accept=".json,application/json" class="hidden"></div><p id="backupStatus" class="status" aria-live="polite"></p></div><div class="card" style="margin-top:12px"><h3>🔐 保存について</h3><ul class="muted"><li>データはこのブラウザ内に保存され、別の端末やブラウザとは自動同期されません。</li><li>共有端末では個人情報や公開前の原稿を保存しないでください。</li><li>バックアップJSONには下書きなどの入力内容が含まれることがあります。保管先に注意してください。</li></ul></div><div class="card" style="margin-top:12px"><h3>📱 iPhoneで使う</h3><ol class="muted"><li>GitHubに <code>index.html</code> として配置します。</li><li>GitHub Pagesを有効にすると、ブラウザで開けるURLを作れます。</li><li>Safariの共有メニューから「ホーム画面に追加」を選ぶと、アプリのように開きやすくなります。</li></ol><p class="subtle">GitHub Pagesは公開用の静的ホスティングです。リポジトリの公開設定や機密情報の扱いを確認してから利用してください。</p></div>
+</section>
+</main><div class="footer">ARK COMMAND CENTER v2 · 無料優先 · 入力データはこのブラウザ内に保存</div>
+<script>
+'use strict';
+const $=s=>document.querySelector(s);
+const KEYS=['posts','draftTitle','draftBody','proof','metrics','legal'];
+function get(k,f){try{const v=localStorage.getItem('ark_'+k);return v===null?f:JSON.parse(v)}catch{return f}}
+function set(k,v){try{localStorage.setItem('ark_'+k,JSON.stringify(v));return true}catch(e){console.error(e);return false}}
+const defaultPosts=()=>[1,2,3].map(()=>({title:'',theme:'',date:'',status:'企画中'}));
+const proofItems=['タイトルと本文が一致している','日付・数字・固有名詞を確認した','断定や誇張を避け、根拠を確認した','誤字脱字と読みやすさを確認した','過去記事への導線が自然','見出し画像の権利・内容を確認した'];
+const legalItems=['引用元・事実関係を確認した','画像・文章・商標などの権利を確認した','個人情報・人物の写り込みに配慮した','誹謗中傷・差別・誤解を招く表現がない','広告・アフィリエイトのPR表示を確認した','掲載先とASPの最新規約を確認した','リンク先・商品説明・価格・条件を確認した','公開前に自分で最終確認した'];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function saveNotice(el,msg){el.textContent=msg}
+function renderChecks(id,items,key){const saved=get(key,{});$('#'+id).innerHTML=items.map((t,i)=>`<label class="checkline"><input type="checkbox" data-check="${key}" data-index="${i}" ${saved[i]?'checked':''}><span>${esc(t)}</span></label>`).join('')}
+function renderPosts(){const posts=get('posts',defaultPosts());$('#postFields').innerHTML=posts.map((p,i)=>`<div class="card" style="margin-bottom:10px"><div class="section-title"><h2>投稿候補 ${i+1}</h2><span class="pill">${esc(p.status||'企画中')}</span></div><div class="field"><label for="postTitle${i}">タイトル・仮タイトル</label><input id="postTitle${i}" data-post="${i}" data-field="title" value="${esc(p.title)}" placeholder="記事タイトル"></div><div class="field"><label for="postTheme${i}">テーマ・読者に届けたいこと</label><textarea id="postTheme${i}" data-post="${i}" data-field="theme" placeholder="誰に何を届ける？">${esc(p.theme)}</textarea></div><div class="row"><div class="field"><label for="postDate${i}">投稿予定日</label><input id="postDate${i}" type="date" data-post="${i}" data-field="date" value="${esc(p.date)}"></div><div class="field"><label for="postStatus${i}">進捗</label><select id="postStatus${i}" data-post="${i}" data-field="status">${['企画中','執筆中','校閲中','法務確認','投稿準備完了','投稿済み'].map(s=>`<option ${p.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div></div>`).join('')}
+function readPosts(){const p=[0,1,2].map(i=>{const o={};document.querySelectorAll(`[data-post="${i}"]`).forEach(el=>o[el.dataset.field]=el.value);return o});set('posts',p);updateHome()}
+function updateHome(){const p=get('posts',defaultPosts()),m=get('metrics',[]),l=get('legal',{});$('#statPosts').textContent=`${p.filter(x=>x.title?.trim()||x.theme?.trim()).length} / 3`;const last=m[m.length-1];$('#statImp').textContent=last?Number(last.imp||0).toLocaleString('ja-JP'):'—';$('#statPv').textContent=last?Number(last.pv||0).toLocaleString('ja-JP'):'—';const n=Object.values(l).filter(Boolean).length;$('#statLegal').textContent=Math.round(n/legalItems.length*100)+'%'}
+function renderMetrics(){const m=get('metrics',[]);const insights=$('#metricInsights');if(!m.length){insights.innerHTML='<div class="empty">記録すると分析が表示されます。</div>'}else{const last=m[m.length-1],prev=m.length>1?m[m.length-2]:null;const ctr=last.imp>0?(last.pv/last.imp*100):null;let compare='前回記録がないため、比較はまだできません。';if(prev){const diff=(a,b)=>{const d=Number(a||0)-Number(b||0);return `${d>0?'+':''}${d.toLocaleString('ja-JP')}`};compare=`前回比：インプレッション ${diff(last.imp,prev.imp)} ／ PV ${diff(last.pv,prev.pv)} ／ スキ ${diff(last.likes,prev.likes)}`;}insights.innerHTML=`<div class="history-grid"><div><small>最新インプレッション</small><b>${Number(last.imp||0).toLocaleString('ja-JP')}</b></div><div><small>最新PV</small><b>${Number(last.pv||0).toLocaleString('ja-JP')}</b></div><div><small>最新スキ</small><b>${Number(last.likes||0).toLocaleString('ja-JP')}</b></div></div><p><span class="tag">PV / 表示 ${ctr===null?'—':ctr.toFixed(1)+'%'}</span></p><p class="muted">${esc(compare)}</p><p class="subtle">※PV÷インプレッションは参考比率であり、noteの公式なクリック率とは限りません。</p>`}
+$('#metricHistory').innerHTML=m.length?m.slice().reverse().map((x,i)=>`<div class="item"><div class="item-title">${esc(x.date||'日付なし')}</div><span class="tag">表示 ${Number(x.imp||0).toLocaleString('ja-JP')}</span><span class="tag">PV ${Number(x.pv||0).toLocaleString('ja-JP')}</span><span class="tag">スキ ${Number(x.likes||0).toLocaleString('ja-JP')}</span>${x.note?`<p class="muted">${esc(x.note)}</p>`:''}<button class="btn danger" data-delete-metric="${m.length-1-i}" aria-label="${esc(x.date)}の記録を削除">この記録を削除</button></div>`).join(''):'<div class="empty">まだ記録がありません。</div>';updateHome()}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===b.dataset.page));window.scrollTo({top:0,behavior:'smooth'})}));
+$('#savePosts').onclick=()=>{readPosts();saveNotice($('#savePosts'),'保存しました ✓');setTimeout(()=>$('#savePosts').textContent='保存する',1300)};
+$('#draftTitle').value=get('draftTitle','');$('#draftBody').value=get('draftBody','');
+$('#draftTitle').addEventListener('input',()=>set('draftTitle',$('#draftTitle').value));
+$('#draftBody').addEventListener('input',()=>set('draftBody',$('#draftBody').value));
+$('#saveDraft').onclick=()=>{set('draftTitle',$('#draftTitle').value);set('draftBody',$('#draftBody').value);saveNotice($('#draftStatus'),'下書きを保存しました ✓')};
+$('#countText').onclick=()=>saveNotice($('#draftStatus'),`本文 ${$('#draftBody').value.length.toLocaleString('ja-JP')} 文字（タイトル除く）`);
+$('#copyDraft').onclick=async()=>{try{await navigator.clipboard.writeText($('#draftBody').value);saveNotice($('#draftStatus'),'本文をコピーしました ✓')}catch{saveNotice($('#draftStatus'),'コピーできませんでした。本文を長押ししてコピーしてください。')}};
+$('#exportDraft').onclick=()=>downloadText('ark-draft.txt',($('#draftTitle').value?$('#draftTitle').value+'\n\n':'')+$('#draftBody').value,'text/plain;charset=utf-8');
+$('#clearDraft').onclick=()=>{if(confirm('タイトルと本文を消去しますか？')){$('#draftTitle').value='';$('#draftBody').value='';set('draftTitle','');set('draftBody','');saveNotice($('#draftStatus'),'下書きを消去しました。')}};
+document.addEventListener('change',e=>{if(e.target.matches('[data-check]')){const k=e.target.dataset.check,i=e.target.dataset.index,o=get(k,{});o[i]=e.target.checked;set(k,o);updateHome()}if(e.target.matches('[data-post]'))readPosts()});
+$('#resetLegal').onclick=()=>{if(confirm('法務チェックをすべて未確認に戻しますか？')){set('legal',{});renderChecks('legalChecks',legalItems,'legal');updateHome()}};
+$('#saveMetrics').onclick=()=>{const m=get('metrics',[]),date=$('#metricDate').value.trim();if(!date){saveNotice($('#metricStatus'),'集計日・期間のラベルを入力してください。');$('#metricDate').focus();return}const vals=['metricImp','metricPv','metricLikes'].map(id=>Math.max(0,Math.floor(Number($('#'+id).value)||0)));m.push({date,imp:vals[0],pv:vals[1],likes:vals[2],note:$('#metricNote').value.trim()});set('metrics',m);saveNotice($('#metricStatus'),'実績を保存しました ✓');['metricDate','metricImp','metricPv','metricLikes','metricNote'].forEach(id=>$('#'+id).value='');renderMetrics()};
+$('#metricHistory').addEventListener('click',e=>{const b=e.target.closest('[data-delete-metric]');if(!b)return;if(!confirm('この実績記録を削除しますか？'))return;const m=get('metrics',[]);m.splice(Number(b.dataset.deleteMetric),1);set('metrics',m);renderMetrics()});
+$('#exportMetrics').onclick=()=>{const m=get('metrics',[]);if(!m.length){alert('書き出す実績がありません');return}const rows=[['集計日・期間','インプレッション','PV','スキ','メモ'],...m.map(x=>[x.date,x.imp,x.pv,x.likes,x.note])];const csv='\uFEFF'+rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');downloadText('ark-note-metrics.csv',csv,'text/csv;charset=utf-8;')};
+function downloadText(name,content,type){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+$('#exportBackup').onclick=()=>{const data={app:'ARK COMMAND CENTER',version:2,exportedAt:new Date().toISOString(),data:Object.fromEntries(KEYS.map(k=>[k,get(k,k==='posts'?defaultPosts():k==='metrics'?[]:k==='draftTitle'||k==='draftBody'?'':{})]))};downloadText('ark-backup-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(data,null,2),'application/json;charset=utf-8');saveNotice($('#backupStatus'),'バックアップを書き出しました ✓')};
+$('#importBackupBtn').onclick=()=>$('#importBackup').click();
+$('#importBackup').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const data=JSON.parse(await file.text());const obj=data.data||data;if(!obj||typeof obj!=='object')throw Error('invalid');if(!confirm('バックアップのデータで現在の保存内容を置き換えますか？'))return;KEYS.forEach(k=>{if(Object.prototype.hasOwnProperty.call(obj,k))set(k,obj[k])});$('#draftTitle').value=get('draftTitle','');$('#draftBody').value=get('draftBody','');renderPosts();renderChecks('proofChecks',proofItems,'proof');renderChecks('legalChecks',legalItems,'legal');renderMetrics();saveNotice($('#backupStatus'),'バックアップを読み込みました ✓')}catch{saveNotice($('#backupStatus'),'読み込めませんでした。ARKのJSONバックアップを選んでください。')}finally{e.target.value=''}};
+
+// AI作戦室：外部API不要で、AIに貼り付ける指示文を作成
+function strategyBase(){
+  return {
+    topic:$('#strategyTopic').value.trim() || '読者が興味を持つ季節の話題',
+    reader:$('#strategyReader').value.trim() || '初心者にも読みやすく、読んだら誰かに話したくなる内容',
+    goal:$('#strategyGoal').value
+  };
+}
+function setStrategyPrompt(kind){
+  const x=strategyBase();
+  const common=`あなたはARK編集部です。日本語で、スマホで読みやすく、絵文字を適度に使ってください。目的：${x.goal}。テーマ：${x.topic}。読者に届けたいこと：${x.reader}。\\n\\n必ず守ること：\\n- 不確かな事実を断定しない。日付・数字・固有名詞は信頼できる情報源で確認し、確認できない点は明記する。\\n- 文章や画像を無断転載しない。引用は必要最小限にし出典を示す。\\n- 過度な煽りや誇張を避ける。\\n- 無料noteで認知を広げる方針を優先する。\\n`;
+  let prompt='';
+  if(kind==='article'){
+    prompt=common+`\\n成果物：\\n1. 読みたくなるタイトル案を3つ\\n2. noteにそのまま貼れる完成記事（目安1,500〜2,000字。テーマに応じて調整）\\n3. 過去記事へ自然につなぐ一文（記事名が不明なら候補欄を作る）\\n4. 読者に押しつけない締めの一言\\n5. 見出し画像の生成用プロンプト（人物なし、文字なしを基本）\\n6. 校閲結果と公開前の法務チェック項目\\n7. 事実確認が必要な箇所と参照すべき公式情報源\\n完成原稿と確認メモを分けて出してください。`;
+  } else if(kind==='trend'){
+    prompt=`ARKトレンド班として、テーマ「${x.topic}」に関連する、直近の日本向けnote記事候補を調査してください。目的は${x.goal}です。読者像：${x.reader}。\\n\\nウェブ検索を使い、可能なら直近7日以内の話題を優先。候補を5件、各候補について「話題の要約」「なぜ今読む価値があるか」「note記事の切り口」「確認した日付」「一次情報・公式情報のURL」「注意点」を整理してください。検索できない場合はリアルタイム情報を知っているふりをせず、その旨を明記してください。噂だけの話題は除外し、公開前に日付と事実を再確認してください。最後に、投稿予定3本の組み合わせを提案してください。`;
+  } else {
+    const savedMetrics=JSON.parse(localStorage.getItem('ark_metrics')||'[]');
+    prompt=`ARK分析部として、以下のnote実績を分析してください。目的：${x.goal}。\\n\\n実績データ（ユーザー入力）:\\n${JSON.stringify(savedMetrics,null,2)}\\n\\n次の順で回答してください：1. 数字から言えること 2. 前回比較（集計期間が重なる場合は単純合算しない） 3. 伸びた可能性のある要因と、断定できない点 4. 次の投稿で試す改善策を3つ 5. 投稿予定3本の案 6. 収益化を急がず認知を増やすための行動。データにないことは推測と明記し、数字を捏造しないでください。`;
+  }
+  $('#strategyOutput').value=prompt;
+  set('strategyPrompt',prompt);
+  saveNotice($('#strategyStatus'),'指示文を作成しました。コピーしてAIに貼り付けてください。');
+}
+$('#makeArticlePrompt').onclick=()=>setStrategyPrompt('article');
+$('#makeTrendPrompt').onclick=()=>setStrategyPrompt('trend');
+$('#makeAnalysisPrompt').onclick=()=>setStrategyPrompt('analysis');
+$('#copyStrategyPrompt').onclick=async()=>{try{await navigator.clipboard.writeText($('#strategyOutput').value);saveNotice($('#strategyStatus'),'指示文をコピーしました ✓')}catch{ $('#strategyOutput').focus();$('#strategyOutput').select();saveNotice($('#strategyStatus'),'自動コピーできませんでした。選択された文章を長押ししてコピーしてください。')}};
+$('#strategyTopic').value=get('strategyTopic','');
+$('#strategyReader').value=get('strategyReader','');
+$('#strategyGoal').value=get('strategyGoal','認知を広げる無料note記事');
+$('#strategyOutput').value=get('strategyPrompt','');
+['strategyTopic','strategyReader','strategyGoal'].forEach(id=>$('#'+id).addEventListener('input',()=>set(id,$('#'+id).value)));
+
+renderChecks('proofChecks',proofItems,'proof');renderChecks('legalChecks',legalItems,'legal');renderPosts();renderMetrics();updateHome();
+</script>
+</body>
+</html>
