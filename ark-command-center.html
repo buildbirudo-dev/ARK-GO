@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101827">
+<title>ARK COMMAND CENTER</title>
+<style>
+:root{--bg:#0b1220;--panel:#131e30;--panel2:#1a2940;--text:#f3f6fb;--muted:#a8b5c9;--line:#2a3b55;--accent:#9be7c4;--accent2:#b6c8ff;--warn:#ffd68a;--danger:#ffb3b3}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#101a2d,#0b1220 55%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+header{padding:22px 18px 14px;max-width:920px;margin:auto} .eyebrow{font-size:11px;letter-spacing:.18em;color:var(--accent);font-weight:800}h1{font-size:27px;line-height:1.15;margin:7px 0}header p{margin:7px 0;color:var(--muted);font-size:13px}
+nav{display:flex;gap:8px;overflow:auto;padding:0 14px 12px;max-width:920px;margin:auto;scrollbar-width:none}nav button{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:10px 14px;font-size:13px;font-weight:700}nav button.active{background:var(--accent);color:#10251c;border-color:var(--accent)}
+main{max-width:920px;margin:auto;padding:0 14px 36px}.page{display:none}.page.active{display:block}.hero{background:linear-gradient(130deg,#183b3a,#1a2c47);border:1px solid #315d5a;border-radius:20px;padding:18px;margin-bottom:14px}.hero h2{font-size:20px;margin:4px 0 6px}.hero p{margin:0;color:#d5e8e3;font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;min-width:0}.stat small,.muted{color:var(--muted);font-size:12px}.stat strong{display:block;font-size:25px;margin-top:5px}.section-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:18px 2px 10px}.section-title h2{font-size:17px;margin:0}.card h3{font-size:15px;margin:0 0 8px}.field{display:flex;flex-direction:column;gap:5px;margin:10px 0}.field label{font-size:12px;color:var(--muted);font-weight:700}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:#0c1524;color:var(--text);border-radius:10px;padding:11px 12px;font:inherit;font-size:14px}.field textarea{min-height:100px;resize:vertical}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:750;cursor:pointer}.btn.primary{background:var(--accent);color:#10251c;border-color:var(--accent)}.btn.soft{background:transparent}.btn.danger{color:var(--danger)}.item{padding:12px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}.item-title{font-weight:800;font-size:14px}.tag{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:3px 8px;color:var(--muted);font-size:11px;margin:4px 4px 0 0}.checkline{display:flex;gap:9px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.checkline input{margin-top:4px;accent-color:var(--accent);width:17px;height:17px}.notice{font-size:12px;color:var(--muted);background:#101b2c;border-radius:10px;padding:10px;margin-top:10px}.empty{color:var(--muted);font-size:13px;padding:12px 0}.metric-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10px}.footer{text-align:center;color:#71829b;font-size:11px;padding:10px 20px 26px}
+@media(min-width:680px){header{padding-top:30px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.layout{display:grid;grid-template-columns:1.05fr .95fr;gap:14px}.metric-form{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">YOUR AI WORKFLOW · FREE-FIRST</div><h1>ARK COMMAND CENTER</h1><p>企画する。整える。確認する。次の一手を決める。</p></header>
+<nav aria-label="メインメニュー">
+<button class="active" data-page="home">🏠 ホーム</button><button data-page="posts">🗓 投稿予定3本</button><button data-page="editor">✍️ 記事作成・校閲</button><button data-page="analytics">📊 note実績</button><button data-page="legal">⚖️ 法務チェック</button>
+</nav>
+<main>
+<section id="home" class="page active">
+<div class="hero"><div class="eyebrow">ARK / INITIAL BUILD</div><h2>今日の作戦を、ここから。</h2><p>投稿計画・記事下書き・実績・確認項目をまとめて管理する初期版。入力内容はこの端末のブラウザに保存されます。</p></div>
+<div class="grid"><div class="stat"><small>投稿予定</small><strong id="statPosts">0 / 3</strong><span class="muted">枠が埋まっている数</span></div><div class="stat"><small>累計インプレッション</small><strong id="statImp">0</strong><span class="muted">登録データ合計</span></div><div class="stat"><small>累計PV</small><strong id="statPv">0</strong><span class="muted">登録データ合計</span></div><div class="stat"><small>法務確認</small><strong id="statLegal">0%</strong><span class="muted">チェック項目の進捗</span></div></div>
+<div class="layout"><div class="card"><div class="section-title"><h2>📌 ARKチーム</h2></div><div class="item"><div class="item-title">編集部</div><span class="muted">企画・執筆・読みやすさ</span></div><div class="item"><div class="item-title">分析部</div><span class="muted">noteの数字・改善案</span></div><div class="item"><div class="item-title">収益部</div><span class="muted">広告・導線・成果の記録</span></div><div class="item"><div class="item-title">法務部</div><span class="muted">規約・PR表示・権利・事実確認</span></div></div>
+<div class="card"><div class="section-title"><h2>⚡ 次にやること</h2></div><div class="item"><div class="item-title">1. 投稿候補を3本入力</div><span class="muted">投稿予定3本タブ</span></div><div class="item"><div class="item-title">2. 下書きを保存</div><span class="muted">記事作成・校閲タブ</span></div><div class="item"><div class="item-title">3. 数字を記録</div><span class="muted">note実績タブ</span></div><div class="notice">※この初期版は投稿・自動取得・AI生成を実行しません。投稿文や実績を整理するための管理画面です。</div></div></div>
+</section>
+<section id="posts" class="page">
+<div class="section-title"><h2>🗓 投稿予定3本</h2><button class="btn primary" id="savePosts">保存する</button></div><p class="muted">タイトル・テーマ・状態を入力。空欄でも保存できます。</p>
+<div id="postFields"></div><div class="notice">おすすめ：①トレンド・雑学 ②過去記事につながる記事 ③読者の役に立つ実用記事。候補は実際の情報を確認してから投稿しよう。</div>
+</section>
+<section id="editor" class="page">
+<div class="section-title"><h2>✍️ 記事作成・校閲</h2><button class="btn primary" id="saveDraft">下書きを保存</button></div>
+<div class="card"><div class="field"><label for="draftTitle">記事タイトル</label><input id="draftTitle" placeholder="例：知ると誰かに話したくなる秋の雑学"></div><div class="field"><label for="draftBody">記事本文</label><textarea id="draftBody" style="min-height:260px" placeholder="ここに記事の下書きを貼り付ける…"></textarea></div><div class="row"><button class="btn" id="countText">文字数を確認</button><button class="btn" id="copyDraft">本文をコピー</button><button class="btn soft" id="clearDraft">クリア</button></div><p id="draftStatus" class="muted" aria-live="polite">下書きはこの端末のブラウザに保存できます。</p></div>
+<div class="card" style="margin-top:12px"><h3>🔎 校閲チェックリスト</h3><div id="proofChecks"></div><div class="notice">校閲補助のチェック項目です。事実確認や法的な適合を自動保証するものではありません。</div></div>
+</section>
+<section id="analytics" class="page">
+<div class="section-title"><h2>📊 note実績を記録</h2><button class="btn primary" id="saveMetrics">記録する</button></div>
+<div class="card"><div class="field"><label for="metricDate">集計日・期間のラベル</label><input id="metricDate" placeholder="例：2026/10/11"></div><div class="metric-form"><div class="field"><label for="metricImp">インプレッション</label><input id="metricImp" type="number" min="0" placeholder="0"></div><div class="field"><label for="metricPv">ページビュー</label><input id="metricPv" type="number" min="0" placeholder="0"></div><div class="field"><label for="metricLikes">スキ</label><input id="metricLikes" type="number" min="0" placeholder="0"></div></div><div class="field"><label for="metricNote">メモ（伸びた記事・投稿など）</label><textarea id="metricNote" placeholder="気づいたことを記録…"></textarea></div><p id="metricStatus" class="muted" aria-live="polite"></p></div>
+<div class="section-title"><h2>履歴</h2><button class="btn soft" id="exportMetrics">CSVを書き出す</button></div><div class="card" id="metricHistory"><div class="empty">まだ記録がありません。</div></div>
+<div class="notice">ここでは入力した数字を集計します。noteから自動取得する機能は未実装です。CSVは表計算アプリで開けます。</div>
+</section>
+<section id="legal" class="page">
+<div class="section-title"><h2>⚖️ 法務部チェック</h2><button class="btn primary" id="resetLegal">リセット</button></div>
+<div class="hero"><h2>公開前の確認</h2><p>チェックが全部付いても法的な安全を保証するものではありません。迷う点は投稿前に規約・公式情報を確認します。</p></div>
+<div class="card"><div id="legalChecks"></div><div class="notice">アフィリエイトを使う場合は、利用するサービス（楽天・Amazon・A8など）ごとの最新規約と、掲載先SNSの条件を別々に確認してください。広告であることが読者に分かる表示も確認します。</div></div>
+</section>
+</main>
+<div class="footer">ARK Initial Build · 無料優先 · 入力データはこのブラウザ内に保存</div>
+<script>
+const $=s=>document.querySelector(s);
+const get=(k,f)=>{try{return JSON.parse(localStorage.getItem('ark_'+k))??f}catch{return f}};
+const set=(k,v)=>localStorage.setItem('ark_'+k,JSON.stringify(v));
+const proofItems=['タイトルと本文が一致している','日付・数字・固有名詞を確認した','断定や誇張を避けた','誤字脱字と読みやすさを確認した','過去記事への導線が自然','見出し画像の権利・内容を確認した'];
+const legalItems=['引用元・事実関係を確認した','画像・文章・商標などの権利を確認した','個人情報・人物の写り込みに配慮した','誹謗中傷・差別・誤解を招く表現がない','広告・アフィリエイトはPR表示を確認した','掲載先とASPの最新規約を確認した','リンク先・商品説明・価格等を確認した','公開前に自分で最終確認した'];
+const escapeHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function renderChecks(id,items,key){const saved=get(key,{});$('#'+id).innerHTML=items.map((t,i)=>`<label class="checkline"><input type="checkbox" data-check="${key}" data-index="${i}" ${saved[i]?'checked':''}><span>${t}</span></label>`).join('');}
+function renderPosts(){let posts=get('posts',[{title:'',theme:'',date:'',status:'企画中'},{title:'',theme:'',date:'',status:'企画中'},{title:'',theme:'',date:'',status:'企画中'}]);$('#postFields').innerHTML=posts.map((p,i)=>`<div class="card" style="margin-bottom:10px"><div class="section-title"><h2>投稿候補 ${i+1}</h2><span class="tag">${escapeHtml(p.status||'企画中')}</span></div><div class="field"><label>タイトル・仮タイトル</label><input data-post="${i}" data-field="title" value="${escapeHtml(p.title)}" placeholder="記事タイトル"></div><div class="field"><label>テーマ・狙い</label><textarea data-post="${i}" data-field="theme" style="min-height:68px" placeholder="誰に何を届ける？">${escapeHtml(p.theme)}</textarea></div><div class="row"><div class="field"><label>投稿予定日</label><input type="date" data-post="${i}" data-field="date" value="${escapeHtml(p.date)}"></div><div class="field"><label>進捗</label><select data-post="${i}" data-field="status">${['企画中','執筆中','校閲中','法務確認','投稿準備完了','投稿済み'].map(s=>`<option ${p.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div></div>`).join('');}
+function readPosts(){let p=[0,1,2].map(i=>{let o={};document.querySelectorAll(`[data-post="${i}"]`).forEach(el=>o[el.dataset.field]=el.value);return o});set('posts',p);updateHome();}
+function renderMetrics(){let m=get('metrics',[]);$('#metricHistory').innerHTML=m.length?m.slice().reverse().map((x,i)=>`<div class="item"><div class="item-title">${escapeHtml(x.date||'日付なし')}</div><span class="tag">表示 ${x.imp}</span><span class="tag">PV ${x.pv}</span><span class="tag">スキ ${x.likes}</span>${x.note?`<p class="muted">${escapeHtml(x.note)}</p>`:''}<button class="btn danger" data-delete-metric="${m.length-1-i}">この記録を削除</button></div>`).join(''):'<div class="empty">まだ記録がありません。</div>';updateHome();}
+function updateHome(){let p=get('posts',[]),m=get('metrics',[]),l=get('legal',{});$('#statPosts').textContent=`${p.filter(x=>x.title||x.theme).length} / 3`;$('#statImp').textContent=m.reduce((a,x)=>a+(+x.imp||0),0).toLocaleString('ja-JP');$('#statPv').textContent=m.reduce((a,x)=>a+(+x.pv||0),0).toLocaleString('ja-JP');let n=Object.keys(l).filter(k=>l[k]).length;$('#statLegal').textContent=Math.round(n/legalItems.length*100)+'%';}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===b.dataset.page));window.scrollTo({top:0,behavior:'smooth'});}));
+$('#savePosts').onclick=()=>{readPosts();$('#savePosts').textContent='保存しました ✓';setTimeout(()=>$('#savePosts').textContent='保存する',1500)};
+$('#draftTitle').value=get('draftTitle','');$('#draftBody').value=get('draftBody','');
+$('#saveDraft').onclick=()=>{set('draftTitle',$('#draftTitle').value);set('draftBody',$('#draftBody').value);$('#draftStatus').textContent='下書きを保存しました ✓'};
+$('#countText').onclick=()=>{$('#draftStatus').textContent=`本文 ${$('#draftBody').value.length.toLocaleString('ja-JP')} 文字（タイトル除く）`};
+$('#copyDraft').onclick=async()=>{try{await navigator.clipboard.writeText($('#draftBody').value);$('#draftStatus').textContent='本文をコピーしました ✓'}catch{$('#draftStatus').textContent='コピーできませんでした。本文を長押ししてコピーしてください。'}};
+$('#clearDraft').onclick=()=>{if(confirm('タイトルと本文を消去しますか？')){$('#draftTitle').value='';$('#draftBody').value='';set('draftTitle','');set('draftBody','');$('#draftStatus').textContent='下書きを消去しました。'}};
+renderChecks('proofChecks',proofItems,'proof');renderChecks('legalChecks',legalItems,'legal');
+document.addEventListener('change',e=>{if(e.target.matches('[data-check]')){let k=e.target.dataset.check,i=e.target.dataset.index,o=get(k,{});o[i]=e.target.checked;set(k,o);updateHome()}if(e.target.matches('[data-post]'))readPosts()});
+$('#resetLegal').onclick=()=>{if(confirm('法務チェックをすべて未確認に戻しますか？')){set('legal',{});renderChecks('legalChecks',legalItems,'legal');updateHome()}};
+$('#saveMetrics').onclick=()=>{let m=get('metrics',[]);let date=$('#metricDate').value.trim();if(!date){$('#metricStatus').textContent='集計日・期間のラベルを入力してください。';return}m.push({date,imp:Math.max(0,+$('#metricImp').value||0),pv:Math.max(0,+$('#metricPv').value||0),likes:Math.max(0,+$('#metricLikes').value||0),note:$('#metricNote').value.trim()});set('metrics',m);$('#metricStatus').textContent='実績を保存しました ✓';['metricDate','metricImp','metricPv','metricLikes','metricNote'].forEach(id=>$('#'+id).value='');renderMetrics()};
+$('#metricHistory').addEventListener('click',e=>{let b=e.target.closest('[data-delete-metric]');if(!b)return;let m=get('metrics',[]);m.splice(+b.dataset.deleteMetric,1);set('metrics',m);renderMetrics()});
+$('#exportMetrics').onclick=()=>{let m=get('metrics',[]);if(!m.length){alert('書き出す実績がありません');return}let rows=[['日付','インプレッション','PV','スキ','メモ'],...m.map(x=>[x.date,x.imp,x.pv,x.likes,x.note])];let csv='\uFEFF'+rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));a.download='ark-note-metrics.csv';a.click();URL.revokeObjectURL(a.href)};
+renderPosts();renderMetrics();updateHome();
+</script>
+</body></html>
