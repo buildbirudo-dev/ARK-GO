@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101827">
+<meta name="description" content="ARK GO - note運用をスマホで管理する無料優先Webアプリ">
+<title>ARK GO v3 | note運用司令塔</title>
+<style>
+:root{--bg:#f3f5f9;--panel:#fff;--ink:#172033;--muted:#697386;--line:#e4e8f0;--accent:#5b61e6;--accent2:#eef0ff;--green:#13845b;--amber:#a45b00;--red:#b42318;--shadow:0 8px 28px rgba(26,38,68,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.app{max-width:1100px;margin:auto;padding:16px}.hero{background:linear-gradient(135deg,#141c31,#343d79);color:#fff;border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-size:12px;letter-spacing:.16em;opacity:.8;font-weight:800}.hero h1{margin:6px 0;font-size:clamp(28px,5vw,40px)}.hero p{margin:0;color:#d9defb;max-width:700px}.tag{display:inline-flex;padding:5px 10px;border-radius:999px;background:#ffffff1c;border:1px solid #ffffff30;font-size:12px}
+.nav{display:flex;gap:8px;overflow-x:auto;padding:14px 0 4px}.nav button{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--muted);padding:10px 14px;border-radius:12px;font-weight:700}.nav button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px;margin-top:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow);min-width:0}.span-12{grid-column:span 12}.span-8{grid-column:span 8}.span-7{grid-column:span 7}.span-6{grid-column:span 6}.span-5{grid-column:span 5}.span-4{grid-column:span 4}.card h2{font-size:17px;margin:0 0 12px}.card h3{font-size:14px;margin:0 0 8px}.muted{color:var(--muted);font-size:13px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{padding:14px;border-radius:14px;background:#f7f8fc;border:1px solid var(--line)}.stat .label{font-size:12px;color:var(--muted)}.stat .num{font-size:clamp(22px,4vw,30px);font-weight:800;letter-spacing:-.03em}.stat small{display:block;color:var(--muted);font-size:11px}
+label{display:block;font-weight:700;font-size:13px;margin:10px 0 5px}input,textarea,select{width:100%;padding:11px 12px;border:1px solid #d7dce7;border-radius:11px;background:#fff;color:var(--ink);outline:none}input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #5b61e61a}textarea{min-height:130px;resize:vertical}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.btn{border:0;border-radius:11px;padding:10px 14px;background:var(--accent);color:#fff;font-weight:800}.btn.secondary{background:#eef0f7;color:#30384e}.btn.outline{background:#fff;border:1px solid var(--line);color:var(--ink)}.btn.danger{background:#fff0ef;color:var(--red)}.btn.small{padding:7px 10px;font-size:12px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.pill{font-size:11px;padding:4px 8px;border-radius:999px;background:#eef0f7;color:#46506a;display:inline-block}.pill.green{background:#e6f7ef;color:var(--green)}.pill.amber{background:#fff2dc;color:var(--amber)}.pill.red{background:#ffeded;color:var(--red)}.post{border:1px solid var(--line);border-radius:14px;padding:13px;margin:10px 0}.posthead{display:flex;justify-content:space-between;gap:10px;align-items:center}.posttitle{font-weight:800}.checklist{display:grid;gap:9px}.check{display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border-radius:10px;background:#f8f9fc}.check input{width:auto;margin-top:4px}.check span{font-size:13px}.notice{padding:11px 12px;border-radius:12px;background:#f1f3ff;color:#343d79;font-size:13px}.notice.warn{background:#fff5e6;color:#81500c}.bar{height:9px;background:#edf0f5;border-radius:999px;overflow:hidden}.bar span{display:block;height:100%;background:var(--accent);width:0}.empty{padding:20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}.footer{padding:20px 4px 30px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:720px){.app{padding:10px}.hero{padding:18px;border-radius:18px}.grid{gap:10px}.span-8,.span-7,.span-6,.span-5,.span-4{grid-column:span 12}.stats{grid-template-columns:repeat(2,1fr)}.card{padding:14px}.nav button{padding:9px 12px}.row.mobile-stack>*{flex:1 1 100%}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <div class="topline"><div class="brand">ARK · COMMAND CENTER</div><span class="tag">無料優先 / iPhone対応</span></div>
+  <h1>ARK GO <span style="font-size:.5em;opacity:.75">v3</span></h1>
+  <p>note運用を、ひとつの画面で。企画・記事作成・実績分析・公開前チェックを手早く管理。</p>
+  <div class="actions"><button class="btn" id="quickNew">✍️ 記事を作る</button><button class="btn secondary" id="exportTop">バックアップを書き出す</button></div>
+</header>
+<nav class="nav" aria-label="メインメニュー">
+  <button class="active" data-view="dashboard">🏠 司令塔</button><button data-view="planner">🗓️ 投稿予定3本</button><button data-view="editor">✍️ 記事作成</button><button data-view="analytics">📊 実績分析</button><button data-view="legal">⚖️ 法務チェック</button><button data-view="settings">🛠️ 保存・設定</button>
+</nav>
+
+<section class="view active" id="dashboard">
+ <div class="grid">
+  <div class="card span-12"><h2>📍 ARK 今日の司令室</h2><div class="stats">
+   <div class="stat"><div class="label">公開記事数</div><div class="num" id="dArticles">18</div><small>手動で更新できます</small></div>
+   <div class="stat"><div class="label">インプレッション</div><div class="num" id="dImpressions">—</div><small>最新の入力データ</small></div>
+   <div class="stat"><div class="label">ページビュー</div><div class="num" id="dViews">—</div><small>最新の入力データ</small></div>
+   <div class="stat"><div class="label">スキ</div><div class="num" id="dLikes">27</div><small>最新の入力データ</small></div>
+  </div></div>
+  <div class="card span-7"><h2>🎯 次のアクション</h2><div id="nextActions"></div><div class="actions"><button class="btn" data-goto="planner">投稿予定を整える</button><button class="btn secondary" data-goto="analytics">実績を更新</button></div></div>
+  <div class="card span-5"><h2>🧑‍🤝‍🧑 ARKチーム</h2>
+   <div class="post"><b>編集部</b><div class="muted">読者が話したくなる記事を企画・執筆</div></div>
+   <div class="post"><b>分析部</b><div class="muted">数字を比較して次のテーマを提案</div></div>
+   <div class="post"><b>法務部</b><div class="muted">引用・画像・広告表示・表現を確認</div></div>
+   <div class="post"><b>開発部</b><div class="muted">保存・バックアップ・使いやすさを改善</div></div>
+  </div>
+  <div class="card span-12"><h2>🗓️ 投稿予定の進み具合</h2><div class="row"><div><div class="topline"><b>準備状況</b><span id="planCount" class="muted">0 / 3 件</span></div><div class="bar"><span id="planBar"></span></div></div><div><div class="topline"><b>法務チェック</b><span id="legalCount" class="muted">0 / 7 項目</span></div><div class="bar"><span id="legalBar"></span></div></div></div></div>
+ </div>
+</section>
+
+<section class="view" id="planner">
+ <div class="grid"><div class="card span-12"><h2>🗓️ 投稿予定3本</h2><p class="muted">テーマ・公開予定・進捗を管理。入力はこの端末のブラウザに自動保存されます。</p><div id="postList"></div><div class="actions"><button class="btn" id="savePlans">予定を保存</button><button class="btn secondary" id="clearPlans">3本を初期案に戻す</button></div></div>
+ <div class="card span-12"><h2>🔥 トレンド調査の依頼文</h2><p class="muted">このボタンで調査依頼文を作成してコピーできます。アプリ自体がリアルタイム検索を行う機能ではありません。</p><textarea id="trendPrompt" readonly>ARK調査部への指示：本日の日付を確認し、日本のnote読者向けに話題性が高く、初心者にも読みやすい記事テーマを3案提案してください。直近のニュース・公式発表をウェブで確認し、各案に根拠リンク、事実確認が必要な点、読者にとっての意外性、過去記事との内部リンク案を付けてください。煽り・未確認情報・人物画像の使用は避けてください。</textarea><div class="actions"><button class="btn" data-copy="trendPrompt">調査依頼文をコピー</button></div></div></div>
+</section>
+
+<section class="view" id="editor">
+ <div class="grid"><div class="card span-7"><h2>✍️ 記事エディター</h2>
+  <label for="articleTitle">記事タイトル</label><input id="articleTitle" placeholder="例：知ると誰かに話したくなる秋の雑学 🍂">
+  <label for="articleBody">記事本文</label><textarea id="articleBody" style="min-height:330px" placeholder="導入 → 見出し → 本文 → まとめ → 関連記事への案内"></textarea>
+  <div class="row"><div><span class="muted">文字数</span><div style="font-size:24px;font-weight:800" id="charCount">0</div></div><div><span class="muted">読了目安</span><div style="font-size:24px;font-weight:800" id="readTime">約1分</div></div></div>
+  <div class="actions"><button class="btn" id="copyArticle">タイトル＋本文をコピー</button><button class="btn secondary" id="saveDraft">下書きを保存</button><button class="btn outline" id="clearEditor">クリア</button></div>
+ </div><div class="card span-5"><h2>🧩 編集部チェック</h2><div class="checklist">
+  <label class="check"><input type="checkbox"><span>冒頭で読者の興味を引いている</span></label><label class="check"><input type="checkbox"><span>見出しと段落が読みやすい</span></label><label class="check"><input type="checkbox"><span>数字・日付・固有名詞を確認した</span></label><label class="check"><input type="checkbox"><span>過去記事への自然な導線がある</span></label><label class="check"><input type="checkbox"><span>広告・アフィリエイト表示を確認した</span></label>
+ </div><div class="notice" style="margin-top:14px">おすすめ：無料記事で認知を広げ、読者に役立つ情報を優先。公開前に法務チェックも行おう。</div>
+ <label for="headerIdea">見出し画像案（人物なし）</label><textarea id="headerIdea" placeholder="季節感、モチーフ、色、余白など"></textarea><div class="actions"><button class="btn secondary" id="copyImageIdea">画像案をコピー</button></div></div></div>
+</section>
+
+<section class="view" id="analytics">
+ <div class="grid"><div class="card span-12"><h2>📊 note実績入力</h2><p class="muted">noteのダッシュボードから数値を転記。自動取得ではありません。</p>
+ <div class="grid" style="margin-top:0">
+  <div class="span-4"><label for="metricDate">集計期間・日付</label><input id="metricDate" type="text" placeholder="例：10/12時点"></div>
+  <div class="span-4"><label for="metricImpressions">インプレッション</label><input id="metricImpressions" type="number" min="0" placeholder="例：623"></div>
+  <div class="span-4"><label for="metricViews">ページビュー</label><input id="metricViews" type="number" min="0" placeholder="例：79"></div>
+  <div class="span-4"><label for="metricLikes">スキ</label><input id="metricLikes" type="number" min="0" placeholder="例：27"></div>
+  <div class="span-4"><label for="metricArticles">公開記事数</label><input id="metricArticles" type="number" min="0" placeholder="例：18"></div>
+  <div class="span-4"><label for="metricSales">売上（円）</label><input id="metricSales" type="number" min="0" placeholder="例：0"></div>
+ </div><div class="actions"><button class="btn" id="saveMetrics">実績を保存</button><button class="btn secondary" id="resetMetrics">入力をリセット</button></div></div>
+ <div class="card span-12"><h2>📈 保存した実績</h2><div id="metricsTable"></div><div class="actions"><button class="btn secondary" id="exportCsv">CSVを書き出す</button><button class="btn outline" id="clearMetrics">実績履歴を削除</button></div></div>
+ <div class="card span-12"><h2>🧠 分析メモ</h2><div id="analysisNotes" class="notice">実績を入力すると、PV率や次の確認ポイントを表示します。</div></div></div>
+</section>
+
+<section class="view" id="legal">
+ <div class="grid"><div class="card span-7"><h2>⚖️ 公開前 法務部チェック</h2><p class="muted">チェックを入れた項目だけ完了扱い。法的な保証ではなく、公開前の確認補助です。</p><div id="legalChecks" class="checklist">
+  <label class="check"><input type="checkbox" data-legal="facts"><span>事実・日付・数字を信頼できる情報源で確認</span></label>
+  <label class="check"><input type="checkbox" data-legal="copyright"><span>引用は必要最小限で、出典とリンクを明記</span></label>
+  <label class="check"><input type="checkbox" data-legal="images"><span>画像の権利・利用条件を確認（人物写真は避ける）</span></label>
+  <label class="check"><input type="checkbox" data-legal="privacy"><span>個人情報・プライバシーに配慮</span></label>
+  <label class="check"><input type="checkbox" data-legal="defamation"><span>特定の個人・企業への断定的な非難がない</span></label>
+  <label class="check"><input type="checkbox" data-legal="ads"><span>広告・アフィリエイトであることを適切に表示</span></label>
+  <label class="check"><input type="checkbox" data-legal="platform"><span>noteの規約・広告先プログラムの条件を確認</span></label>
+ </div><div class="actions"><button class="btn" id="saveLegal">チェック状況を保存</button><button class="btn secondary" id="resetLegal">チェックを外す</button></div><div id="legalStatus" class="notice" style="margin-top:12px">未確認の項目があります。</div></div>
+ <div class="card span-5"><h2>🚦 判定の目安</h2><div class="post"><span class="pill green">公開準備OKの目安</span><p class="muted">すべて確認済みで、根拠・権利・広告表示に問題がない。</p></div><div class="post"><span class="pill amber">要修正</span><p class="muted">出典不明、画像の利用条件が曖昧、広告表示が不足している。</p></div><div class="post"><span class="pill red">公開保留</span><p class="muted">事実誤認の疑い、権利侵害、個人情報の露出などが残っている。</p></div><p class="muted">※このチェックは弁護士による法律相談・審査の代わりにはなりません。</p></div></div>
+</section>
+
+<section class="view" id="settings">
+ <div class="grid"><div class="card span-6"><h2>💾 保存とバックアップ</h2><div class="notice">データはこの端末・ブラウザ内に保存されます。ブラウザのデータ削除や端末変更に備えて、定期的にバックアップしてください。</div><div class="actions"><button class="btn" id="exportAll">JSONバックアップを保存</button><button class="btn secondary" id="importBtn">バックアップを読み込む</button><input id="importFile" type="file" accept=".json,application/json" hidden></div><p class="muted">iPhoneでは「ファイルに保存」を選択すると保管できます。</p></div>
+ <div class="card span-6"><h2>🛠️ アプリ情報</h2><p><b>ARK GO v3</b></p><p class="muted">無料優先 / iPhone・PC対応 / 単一HTML構成</p><p class="muted">現状、リアルタイム検索・ChatGPT自動接続・noteへの自動投稿・クラウド同期は搭載していません。トレンド欄は調査依頼文の作成用です。</p><div class="actions"><button class="btn danger" id="resetAll">この端末のARKデータを初期化</button></div></div></div>
+</section>
+<div class="footer">ARK GO · まずは小さく動かし、実績を見ながら進化させよう ☕</div>
+</div>
+<script>
+const KEY='ark_go_v3_state';
+const defaultState={
+ plans:[
+  {title:'今日の季節・記念日雑学 🍂',date:'',status:'企画中',note:'公式情報を確認し、読んだ人が誰かに話したくなる切り口にする。'},
+  {title:'宇宙・望遠鏡から広がる発見 🔭',date:'',status:'企画中',note:'過去の天体記事へ自然につなぐ。'},
+  {title:'暮らしに役立つ小さな工夫 ☕',date:'',status:'企画中',note:'初心者にも読みやすく、押しつけない語り口にする。'}
+ ],
+ metrics:[], articleCount:18, likes:27, legal:{}, draft:{title:'',body:'',headerIdea:''}
+};
+let state=loadState();
+function loadState(){try{return {...structuredClone(defaultState),...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){return structuredClone(defaultState)}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(state));renderDashboard()}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function setView(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));if(id==='planner')renderPlans();if(id==='analytics')renderMetrics();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.goto)));
+function renderPlans(){const host=document.getElementById('postList');host.innerHTML=state.plans.map((p,i)=>`<div class="post"><div class="posthead"><div class="posttitle">投稿 ${i+1}</div><span class="pill">${esc(p.status||'企画中')}</span></div><label>タイトル・テーマ</label><input data-plan="${i}" data-field="title" value="${esc(p.title)}" placeholder="記事テーマ"><div class="row mobile-stack"><div><label>公開予定日</label><input type="date" data-plan="${i}" data-field="date" value="${esc(p.date)}"></div><div><label>進捗</label><select data-plan="${i}" data-field="status">${['企画中','執筆中','校閲中','公開準備OK','公開済み'].map(s=>`<option ${p.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div><label>編集メモ</label><textarea data-plan="${i}" data-field="note" style="min-height:70px">${esc(p.note)}</textarea><div class="actions"><button class="btn small secondary" data-use-plan="${i}">記事作成へ送る</button></div></div>`).join('');host.querySelectorAll('[data-plan]').forEach(el=>el.addEventListener('change',()=>{state.plans[+el.dataset.plan][el.dataset.field]=el.value;persist()}));host.querySelectorAll('[data-use-plan]').forEach(b=>b.addEventListener('click',()=>{const p=state.plans[+b.dataset.usePlan];document.getElementById('articleTitle').value=p.title;document.getElementById('articleBody').value=p.note+'\n\n';updateCount();setView('editor')}))}
+function renderDashboard(){const latest=state.metrics?.[0];document.getElementById('dArticles').textContent=state.articleCount??18;document.getElementById('dImpressions').textContent=latest?latest.impressions:'—';document.getElementById('dViews').textContent=latest?latest.views:'—';document.getElementById('dLikes').textContent=latest?latest.likes:(state.likes??27);const filled=state.plans.filter(p=>p.title&&p.title.trim()).length;document.getElementById('planCount').textContent=filled+' / 3 件';document.getElementById('planBar').style.width=(filled/3*100)+'%';const checks=Object.values(state.legal||{}).filter(Boolean).length;document.getElementById('legalCount').textContent=checks+' / 7 項目';document.getElementById('legalBar').style.width=(checks/7*100)+'%';document.getElementById('nextActions').innerHTML=`<div class="post"><b>1. 投稿予定を確認</b><div class="muted">3本のタイトル・予定日・進捗を更新する。</div></div><div class="post"><b>2. 最新実績を記録</b><div class="muted">数字を入力し、前回からの変化を確認する。</div></div><div class="post"><b>3. 公開前チェック</b><div class="muted">事実・出典・画像・広告表示を確認する。</div></div>`}
+function updateCount(){const t=document.getElementById('articleBody').value;document.getElementById('charCount').textContent=t.length.toLocaleString('ja-JP');document.getElementById('readTime').textContent='約'+Math.max(1,Math.ceil(t.length/500))+'分'}
+['articleTitle','articleBody','headerIdea'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{updateCount();state.draft={title:document.getElementById('articleTitle').value,body:document.getElementById('articleBody').value,headerIdea:document.getElementById('headerIdea').value};localStorage.setItem(KEY,JSON.stringify(state))}));
+function draftText(){return document.getElementById('articleTitle').value+'\n\n'+document.getElementById('articleBody').value}
+async function copyText(text){try{await navigator.clipboard.writeText(text);alert('コピーしました ✅')}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();alert('コピーしました ✅')}}
+document.getElementById('copyArticle').onclick=()=>copyText(draftText());document.getElementById('copyImageIdea').onclick=()=>copyText(document.getElementById('headerIdea').value);document.getElementById('saveDraft').onclick=()=>{state.draft={title:document.getElementById('articleTitle').value,body:document.getElementById('articleBody').value,headerIdea:document.getElementById('headerIdea').value};persist();alert('下書きを保存しました ✅')};document.getElementById('clearEditor').onclick=()=>{if(confirm('エディターの内容を消しますか？')){['articleTitle','articleBody','headerIdea'].forEach(id=>document.getElementById(id).value='');updateCount();state.draft={};persist()}}
+function renderMetrics(){const host=document.getElementById('metricsTable');if(!state.metrics.length){host.innerHTML='<div class="empty">まだ実績がありません。上のフォームから入力してください。</div>';document.getElementById('analysisNotes').textContent='実績を入力すると、PV率や次の確認ポイントを表示します。';return}host.innerHTML=`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr>${['日付','インプレッション','PV','スキ','記事数','売上'].map(x=>`<th style="text-align:left;padding:9px;border-bottom:1px solid var(--line)">${x}</th>`).join('')}</tr></thead><tbody>${state.metrics.map(m=>`<tr>${[m.date,m.impressions,m.views,m.likes,m.articles,'¥'+Number(m.sales||0).toLocaleString()].map(x=>`<td style="padding:9px;border-bottom:1px solid var(--line)">${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;const m=state.metrics[0],rate=m.impressions?Math.round(m.views/m.impressions*1000)/10:0;let msg=`最新データ「${m.date}」：PV率の目安は ${rate}%（PV ÷ インプレッション）。`;if(state.metrics[1]){const old=state.metrics[1];msg+=` 前回比：インプレッション ${signed(m.impressions-old.impressions)}、PV ${signed(m.views-old.views)}、スキ ${signed(m.likes-old.likes)}。`}msg+=' 数字は期間の定義をそろえて比較し、反応のよいテーマを次の投稿に活かしましょう。';document.getElementById('analysisNotes').textContent=msg}
+function signed(n){return (n>0?'+':'')+n}
+document.getElementById('saveMetrics').onclick=()=>{const get=id=>document.getElementById(id).value;const m={date:get('metricDate').trim()||new Date().toLocaleDateString('ja-JP'),impressions:Number(get('metricImpressions')||0),views:Number(get('metricViews')||0),likes:Number(get('metricLikes')||0),articles:Number(get('metricArticles')||state.articleCount||0),sales:Number(get('metricSales')||0)};state.metrics.unshift(m);state.metrics=state.metrics.slice(0,100);state.articleCount=m.articles;state.likes=m.likes;persist();renderMetrics();alert('実績を保存しました ✅')};
+document.getElementById('resetMetrics').onclick=()=>['metricDate','metricImpressions','metricViews','metricLikes','metricArticles','metricSales'].forEach(id=>document.getElementById(id).value='');
+document.getElementById('clearMetrics').onclick=()=>{if(confirm('実績履歴をすべて削除しますか？')){state.metrics=[];persist();renderMetrics()}};
+document.getElementById('exportCsv').onclick=()=>{const rows=[['date','impressions','views','likes','articles','sales'],...state.metrics.map(m=>[m.date,m.impressions,m.views,m.likes,m.articles,m.sales])];download('ark-note-metrics.csv','\ufeff'+rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n'),'text/csv;charset=utf-8')};
+function legalSync(){document.querySelectorAll('[data-legal]').forEach(el=>el.checked=!!state.legal[el.dataset.legal]);const count=Object.values(state.legal).filter(Boolean).length;document.getElementById('legalStatus').textContent=count===7?'7項目すべて確認済み。公開前に内容と根拠をもう一度見直してください。':`確認済み：${count}/7項目。未確認の項目が残っています。`;renderDashboard()}
+document.querySelectorAll('[data-legal]').forEach(el=>el.addEventListener('change',()=>{state.legal[el.dataset.legal]=el.checked;persist();legalSync()}));document.getElementById('saveLegal').onclick=()=>{persist();legalSync();alert('チェック状況を保存しました')};document.getElementById('resetLegal').onclick=()=>{state.legal={};persist();legalSync()};
+function download(name,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function exportAll(){download('ARK_GO_backup.json',JSON.stringify(state,null,2),'application/json')}
+document.getElementById('exportAll').onclick=exportAll;document.getElementById('exportTop').onclick=exportAll;
+document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();document.getElementById('importFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const incoming=JSON.parse(await f.text());if(!confirm('現在のARKデータをバックアップの内容で置き換えますか？'))return;state={...structuredClone(defaultState),...incoming};persist();renderPlans();renderMetrics();legalSync();alert('バックアップを読み込みました')}catch(err){alert('読み込めませんでした。ARK GOのJSONバックアップを選んでください')}e.target.value=''};
+document.getElementById('savePlans').onclick=()=>{persist();alert('投稿予定を保存しました')};document.getElementById('clearPlans').onclick=()=>{if(confirm('投稿予定を初期案に戻しますか？')){state.plans=structuredClone(defaultState.plans);persist();renderPlans()}};
+document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>copyText(document.getElementById(b.dataset.copy).value));
+document.getElementById('quickNew').onclick=()=>setView('editor');document.getElementById('resetAll').onclick=()=>{if(confirm('この端末に保存されたARK GOのデータをすべて初期化します。バックアップはありますか？')){localStorage.removeItem(KEY);state=structuredClone(defaultState);location.reload()}};
+const oldDraft=state.draft||{};document.getElementById('articleTitle').value=oldDraft.title||'';document.getElementById('articleBody').value=oldDraft.body||'';document.getElementById('headerIdea').value=oldDraft.headerIdea||'秋の夜空、星と望遠鏡、落ち着いたネイビーと温かいオレンジ。人物なし、文字なし、note見出し向けの横長構図。';updateCount();renderPlans();renderDashboard();renderMetrics();legalSync();
+</script>
+</body>
+</html>
