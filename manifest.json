@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#eff3ff",
   "theme_color": "#5b61e6",
-  "description": "ARK GO - note運用とアフィリエイト運用を管理するスマホ向けPWA",
+  "description": "ARK GO - note運用をスマホで管理する無料優先Webアプリ",
   "icons": [
     { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
