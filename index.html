@@ -8,10 +8,7 @@
 <title>ARK GO v3 | note運用司令塔</title>
 <style>
 :root{--bg:#f3f5f9;--panel:#fff;--ink:#172033;--muted:#697386;--line:#e4e8f0;--accent:#5b61e6;--accent2:#eef0ff;--green:#13845b;--amber:#a45b00;--red:#b42318;--shadow:0 8px 28px rgba(26,38,68,.07)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
-button,input,textarea,select{font:inherit}button{cursor:pointer}.app{max-width:1100px;margin:auto;padding:16px}.hero{background:linear-gradient(135deg,#141c31,#343d79);color:#fff;border-radius:22px;padding:24px;box-shadow:var(--shadow)}
-.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-size:12px;letter-spacing:.16em;opacity:.8;font-weight:800}.tag{background:rgba(255,255,255,.12);padding:6px 10px;border-radius:999px;font-size:11px}.hero h1{margin:6px 0;font-size:clamp(32px,7vw,52px);line-height:1.02}.hero p{margin:0;opacity:.9;max-width:720px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{background:var(--accent);color:#fff;border:none;border-radius:12px;padding:11px 16px;font-weight:700;box-shadow:0 8px 20px rgba(91,97,230,.22)}.btn.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.outline{background:transparent;color:var(--ink);border:1px solid var(--line)}.nav{display:flex;gap:8px;overflow-x:auto;padding:14px 0 4px}.nav button{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--muted);padding:10px 14px;border-radius:12px;font-weight:700}.nav button.active{background:var(--accent2);color:var(--ink);border-color:#dfe4ff}.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px;margin-top:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 6px 18px rgba(17,24,39,.02)}.span-12{grid-column:span 12}.span-7{grid-column:span 7}.span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-4{grid-column:span 4}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}.stat{background:#f8faff;border:1px solid var(--line);border-radius:14px;padding:12px}.label{color:var(--muted);font-size:12px}.num{font-weight:800;font-size:28px;line-height:1.1;padding-top:6px}.muted{color:var(--muted)}h2{margin:0 0 12px;font-size:20px}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.post,.item{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff}.posthead,.topline{display:flex;justify-content:space-between;align-items:center;gap:8px}.posttitle{font-weight:800}.pill{display:inline-block;padding:5px 8px;border-radius:999px;font-size:12px;font-weight:700}.pill.green{background:#ebfdf5;color:var(--green)}.check,.checklist{display:grid;gap:8px}.check{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:#fff}.check input{width:18px;height:18px;margin-top:2px}.notice{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--muted)}label{display:block;font-weight:700;font-size:13px;margin:10px 0 5px}input,textarea,select{width:100%;padding:11px 12px;border:1px solid #d7dce7;border-radius:11px;background:#fff;color:var(--ink)}textarea{min-height:120px;resize:vertical}.footer{padding:18px 10px 40px;text-align:center;color:var(--muted)}.empty{padding:12px;border-radius:12px;border:1px dashed var(--line);color:var(--muted)}
-@media(max-width:720px){.app{padding:10px}.hero{padding:18px;border-radius:18px}.grid{gap:10px}.span-8,.span-7,.span-6,.span-5,.span-4{grid-column:span 12}.stats{grid-template-columns:repeat(2,1fr)}.actions{display:grid;grid-template-columns:1fr 1fr}.btn{width:100%}}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#eff3ff,#f7f9fc 180px);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}button,input,textarea,select{font:inherit}button{cursor:pointer}.app{max-width:1100px;margin:auto;padding:16px}.hero{background:linear-gradient(135deg,#141c31,#343d79);color:#fff;border-radius:22px;padding:22px;box-shadow:var(--shadow)}.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-size:12px;letter-spacing:.16em;opacity:.8;font-weight:800}.tag{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:999px;padding:6px 10px;font-size:11px}.hero h1{margin:14px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.1}.hero p{max-width:700px;margin:0;color:rgba(255,255,255,.86)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.btn{border:none;border-radius:12px;padding:10px 14px;font-weight:700;background:var(--accent);color:#fff;box-shadow:0 10px 18px rgba(91,97,230,.2)}.btn.secondary{background:var(--accent2);color:#3947d7}.btn.outline{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}.nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 14px}.nav button{padding:10px 14px;border:none;border-radius:12px;background:#fff;border:1px solid var(--line);color:var(--ink);font-weight:700}.nav button.active{background:var(--accent2);color:var(--accent);border-color:rgba(91,97,230,.18)}.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);grid-column:span 12}.card h2{margin:0 0 12px;font-size:1.08rem}.span-12{grid-column:span 12}.span-8{grid-column:span 8}.span-7{grid-column:span 7}.span-6{grid-column:span 6}.span-5{grid-column:span 5}.span-4{grid-column:span 4}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stat{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:14px}.label{color:var(--muted);font-size:12px}.num{font-size:clamp(1.5rem,2vw,2.3rem);font-weight:800;margin:8px 0 2px}.muted{color:var(--muted)}.notice{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px 14px}.checklist{display:grid;gap:10px}.check{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#f9fafb}.check input{margin-top:4px}label{display:block;font-weight:600;margin:12px 0 7px}input,textarea,select{width:100%;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;color:var(--ink)}textarea{min-height:150px}.post{border:1px solid var(--line);border-radius:12px;padding:12px;background:#f9fafb;margin-bottom:10px}.posthead{display:flex;justify-content:space-between;gap:10px;align-items:center}.posttitle{font-weight:700}.footer{margin-top:24px;text-align:center;color:var(--muted);font-size:12px}.empty{color:var(--muted);padding:12px 0}@media(max-width:720px){.app{padding:10px}.hero{padding:18px;border-radius:18px}.grid{gap:10px}.span-8,.span-7,.span-6,.span-5,.span-4,.span-12{grid-column:span 12}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -27,251 +24,127 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}.app{max-width:1
 </nav>
 
 <section class="view active" id="dashboard">
- <div class="grid">
-  <div class="card span-12"><h2>📍 ARK 今日の司令室</h2><div class="stats">
-   <div class="stat"><div class="label">公開記事数</div><div class="num" id="dArticles">18</div><small>手動で更新できます</small></div>
-   <div class="stat"><div class="label">インプレッション</div><div class="num" id="dImpressions">—</div><small>最新の入力データ</small></div>
-   <div class="stat"><div class="label">ページビュー</div><div class="num" id="dViews">—</div><small>最新の入力データ</small></div>
-   <div class="stat"><div class="label">スキ</div><div class="num" id="dLikes">27</div><small>最新の入力データ</small></div>
-  </div></div>
-  <div class="card span-7"><h2>🎯 次のアクション</h2><div id="nextActions"></div><div class="actions"><button class="btn" data-goto="planner">投稿予定を整える</button><button class="btn secondary" data-goto="editor">記事を書く</button></div></div>
-  <div class="card span-5"><h2>🧑‍🤝‍🧑 ARKチーム</h2>
-   <div class="post"><b>編集部</b><div class="muted">読者が話したくなる記事を企画・執筆</div></div>
-   <div class="post"><b>分析部</b><div class="muted">数字を比較して次のテーマを提案</div></div>
-   <div class="post"><b>法務部</b><div class="muted">引用・画像・広告表示・表現を確認</div></div>
-   <div class="post"><b>開発部</b><div class="muted">保存・バックアップ・使いやすさを改善</div></div>
+  <div class="grid">
+   <div class="card span-12"><h2>📍 ARK 今日の司令室</h2><div class="stats">
+    <div class="stat"><div class="label">公開記事数</div><div class="num" id="dArticles">18</div><small>手動で更新できます</small></div>
+    <div class="stat"><div class="label">インプレッション</div><div class="num" id="dImpressions">—</div><small>最新の入力データ</small></div>
+    <div class="stat"><div class="label">ページビュー</div><div class="num" id="dViews">—</div><small>最新の入力データ</small></div>
+    <div class="stat"><div class="label">スキ</div><div class="num" id="dLikes">27</div><small>最新の入力データ</small></div>
+   </div></div>
+   <div class="card span-7"><h2>🎯 次のアクション</h2><div id="nextActions"></div><div class="actions"><button class="btn" data-goto="planner">投稿予定を整える</button><button class="btn secondary" data-goto="editor">記事を書く</button></div></div>
+   <div class="card span-5"><h2>🧑‍🤝‍🧑 ARKチーム</h2>
+    <div class="post"><b>編集部</b><div class="muted">読者が話したくなる記事を企画・執筆</div></div>
+    <div class="post"><b>分析部</b><div class="muted">数字を比較して次のテーマを提案</div></div>
+    <div class="post"><b>法務部</b><div class="muted">引用・画像・広告表示・表現を確認</div></div>
+    <div class="post"><b>開発部</b><div class="muted">保存・バックアップ・使いやすさを改善</div></div>
+   </div>
+   <div class="card span-12"><h2>🗓️ 投稿予定の進み具合</h2><div class="row"><div><div class="topline"><b>準備状況</b><span id="planCount" class="muted">0 / 3 件</span></div><div style="margin-top:10px;border:1px solid var(--line);border-radius:12px;overflow:hidden"><div id="planBar" style="height:16px;width:0;background:linear-gradient(90deg,#5b61e6,#8e8ff8);"></div></div></div></div></div></div>
   </div>
-  <div class="card span-12"><h2>🗓️ 投稿予定の進み具合</h2><div class="row"><div><div class="topline"><b>準備状況</b><span id="planCount" class="muted">0 / 3 件</span></div><div id="planProgress" class="notice">準備中です。</div></div></div></div>
- </div>
 </section>
 
 <section class="view" id="planner">
- <div class="grid"><div class="card span-12"><h2>🗓️ 投稿予定3本</h2><p class="muted">テーマ・公開予定・進捗を管理。入力はこの端末のブラウザに自動保存されます。</p>
-  <div id="postList"></div>
-  <div class="actions"><button class="btn" id="savePlans">投稿予定を保存</button><button class="btn secondary" id="clearPlans">初期案を戻す</button></div>
- </div><div class="card span-12"><h2>🔥 トレンド調査の依頼文</h2><p class="muted">このボタンで調査依頼文を作成してコピーできます。アプリ自体がリアルタイム検索を行うわけではありません。</p><div class="actions"><button class="btn" id="makeTrendPrompt">依頼文を作る</button><button class="btn secondary" id="copyTrendPrompt">コピー</button></div><textarea id="trendPrompt" placeholder="依頼文がここに表示されます"></textarea></div></div>
+  <div class="grid"><div class="card span-12"><h2>🗓️ 投稿予定3本</h2><p class="muted">テーマ・公開予定・進捗を管理。入力はこの端末のブラウザに自動保存されます。</p>
+   <div id="postList"></div>
+   <div class="actions"><button class="btn" id="savePlans">投稿予定を保存</button><button class="btn secondary" id="clearPlans">初期案を戻す</button></div>
+  </div><div class="card span-12"><h2>🔥 トレンド調査の依頼文</h2><p class="muted">このボタンで調査依頼文を作成してコピーできます。アプリ自体がリアルタイム検索を行うわけではなく、手元で使いやすい文面を作成する支援ツールです。</p><div class="actions"><button class="btn" id="makeTrendPrompt">依頼文を作る</button><button class="btn secondary" id="copyTrendPrompt">コピー</button></div><textarea id="trendPrompt" style="margin-top:12px" placeholder="依頼文がここに出ます"></textarea></div></div>
 </section>
 
 <section class="view" id="editor">
- <div class="grid"><div class="card span-7"><h2>✍️ 記事エディター</h2>
-  <label for="articleTitle">記事タイトル</label><input id="articleTitle" placeholder="例：知ると誰かに話したくなる秋の雑学 🍂">
-  <label for="articleBody">記事本文</label><textarea id="articleBody" style="min-height:330px" placeholder="導入 → 見出し → 本文 → まとめ → 関連記事への案内"></textarea>
-  <div class="row"><div><span class="muted">文字数</span><div style="font-size:24px;font-weight:800" id="charCount">0</div></div><div><span class="muted">読了目安</span><div style="font-size:24px;font-weight:800" id="readTime">0分</div></div></div>
-  <div class="actions"><button class="btn" id="copyArticle">タイトル＋本文をコピー</button><button class="btn secondary" id="saveDraft">下書きを保存</button><button class="btn outline" id="exportDraft">TXTを書き出す</button></div>
- </div><div class="card span-5"><h2>🧩 編集部チェック</h2><div class="checklist">
-  <label class="check"><input type="checkbox"><span>冒頭で読者の興味を引いている</span></label><label class="check"><input type="checkbox"><span>見出しと段落が読みやすい</span></label><label class="check"><input type="checkbox"><span>数字や固有名詞が正しい</span></label><label class="check"><input type="checkbox"><span>結論が最後に伝わる</span></label>
- </div><div class="notice" style="margin-top:14px">おすすめ：無料記事で認知を広げ、読者に役立つ情報を優先。公開前に法務チェックも行おう。</div>
-  <label for="headerIdea">見出し画像案（人物なし）</label><textarea id="headerIdea" placeholder="季節感、モチーフ、色、余白など"></textarea><div class="actions"><button class="btn" id="copyImageIdea">画像案をコピー</button></div>
- </div></div>
+  <div class="grid"><div class="card span-7"><h2>✍️ 記事エディター</h2>
+   <label for="articleTitle">記事タイトル</label><input id="articleTitle" placeholder="例：知ると誰かに話したくなる秋の雑学 🍂">
+   <label for="articleBody">記事本文</label><textarea id="articleBody" style="min-height:330px" placeholder="導入 → 見出し → 本文 → まとめ → 関連記事への案内"></textarea>
+   <div class="actions"><button class="btn" id="copyArticle">タイトル＋本文をコピー</button><button class="btn secondary" id="saveDraft">下書きを保存</button><button class="btn outline" id="exportDraft">TXT書き出し</button></div>
+   <div class="notice" style="margin-top:14px"><div class="topline"><div><b>文字数</b></div><div id="charCount" style="font-weight:800;font-size:24px">0</div></div><div class="muted">読了目安: <span id="readMinutes">0</span> 分</div></div>
+  </div><div class="card span-5"><h2>🧩 編集部チェック</h2><div class="checklist">
+   <label class="check"><input type="checkbox"><span>冒頭で読者の興味を引いている</span></label>
+   <label class="check"><input type="checkbox"><span>見出しと段落が読みやすい</span></label>
+   <label class="check"><input type="checkbox"><span>事実と意見の線引きができている</span></label>
+   <label class="check"><input type="checkbox"><span>結論が最後に明確に出ている</span></label>
+   <label class="check"><input type="checkbox"><span>次の行動を促す導線がある</span></label>
+  </div><div class="notice" style="margin-top:14px">おすすめ：無料記事で認知を広げ、読者に役立つ情報を優先。公開前に法務チェックも行おう。</div>
+   <label for="headerIdea">見出し画像案（人物なし）</label><textarea id="headerIdea" placeholder="季節感、モチーフ、色、余白など"></textarea><div class="actions"><button class="btn" id="copyImageIdea">画像案をコピー</button></div>
+  </div></div>
 </section>
 
 <section class="view" id="analytics">
- <div class="grid"><div class="card span-12"><h2>📊 note実績入力</h2><p class="muted">noteのダッシュボードから数値を転記。自動取得ではありません。</p>
-  <div class="grid" style="margin-top:0">
-   <div class="span-4"><label for="metricDate">集計期間・日付</label><input id="metricDate" type="text" placeholder="例：10/12時点"></div>
-   <div class="span-4"><label for="metricImpressions">インプレッション</label><input id="metricImpressions" type="number" min="0" placeholder="例：623"></div>
-   <div class="span-4"><label for="metricViews">ページビュー</label><input id="metricViews" type="number" min="0" placeholder="例：79"></div>
-   <div class="span-4"><label for="metricLikes">スキ</label><input id="metricLikes" type="number" min="0" placeholder="例：27"></div>
-   <div class="span-4"><label for="metricArticles">公開記事数</label><input id="metricArticles" type="number" min="0" placeholder="例：18"></div>
-   <div class="span-4"><label for="metricSales">売上（円）</label><input id="metricSales" type="number" min="0" placeholder="例：0"></div>
-  </div><div class="actions"><button class="btn" id="saveMetrics">実績を保存</button><button class="btn secondary" id="resetMetrics">入力をリセット</button></div></div>
-  <div class="card span-12"><h2>📈 保存した実績</h2><div id="metricsTable"></div><div class="actions"><button class="btn secondary" id="exportCsv">CSVを書き出す</button><button class="btn outline" id="clearMetrics">履歴を削除</button></div></div>
-  <div class="card span-12"><h2>🧠 分析メモ</h2><div id="analysisNotes" class="notice">実績を入力すると、PV率や次の確認ポイントを表示します。</div></div></div>
+  <div class="grid"><div class="card span-12"><h2>📊 note実績入力</h2><p class="muted">noteのダッシュボードから数値を転記。自動取得ではありません。</p>
+   <div class="grid" style="margin-top:0">
+    <div class="span-4"><label for="metricDate">集計期間・日付</label><input id="metricDate" type="text" placeholder="例：10/12時点"></div>
+    <div class="span-4"><label for="metricImpressions">インプレッション</label><input id="metricImpressions" type="number" min="0" placeholder="例：623"></div>
+    <div class="span-4"><label for="metricViews">ページビュー</label><input id="metricViews" type="number" min="0" placeholder="例：79"></div>
+    <div class="span-4"><label for="metricLikes">スキ</label><input id="metricLikes" type="number" min="0" placeholder="例：27"></div>
+    <div class="span-4"><label for="metricArticles">公開記事数</label><input id="metricArticles" type="number" min="0" placeholder="例：18"></div>
+    <div class="span-4"><label for="metricSales">売上（円）</label><input id="metricSales" type="number" min="0" placeholder="例：0"></div>
+   </div><div class="actions"><button class="btn" id="saveMetrics">実績を保存</button><button class="btn secondary" id="resetMetrics">入力をリセット</button></div></div>
+   <div class="card span-12"><h2>📈 保存した実績</h2><div id="metricsTable"></div><div class="actions"><button class="btn secondary" id="exportCsv">CSVを書き出す</button><button class="btn outline" id="clearMetrics">履歴を削除</button></div></div>
+   <div class="card span-12"><h2>🧠 分析メモ</h2><div id="analysisNotes" class="notice">実績を入力すると、PV率や次の確認ポイントを表示します。</div></div></div>
 </section>
 
 <section class="view" id="legal">
- <div class="grid"><div class="card span-7"><h2>⚖️ 公開前 法務部チェック</h2><p class="muted">チェックを入れた項目だけ完了扱い。法的な保証ではなく、公開前の確認補助です。</p>
-  <label class="check"><input type="checkbox" data-legal="facts"><span>事実・日付・数字を信頼できる情報源で確認</span></label>
-  <label class="check"><input type="checkbox" data-legal="copyright"><span>引用は必要最小限で、出典とリンクを明記</span></label>
-  <label class="check"><input type="checkbox" data-legal="images"><span>画像の権利・利用条件を確認（人物写真は避ける）</span></label>
-  <label class="check"><input type="checkbox" data-legal="privacy"><span>個人情報・プライバシーに配慮</span></label>
-  <label class="check"><input type="checkbox" data-legal="defamation"><span>特定の個人・企業への断定的な非難がない</span></label>
-  <label class="check"><input type="checkbox" data-legal="ads"><span>広告・アフィリエイトであることを適切に表示</span></label>
-  <label class="check"><input type="checkbox" data-legal="platform"><span>noteの規約・広告先プログラムの条件を確認</span></label>
-  </div><div class="actions"><button class="btn" id="saveLegal">チェック状況を保存</button><button class="btn secondary" id="resetLegal">チェックを外す</button></div><div id="legalStatus" class="notice">まだ未確認です。</div><div class="card span-5"><h2>🚦 判定の目安</h2><div class="post"><span class="pill green">公開準備OKの目安</span><p class="muted">すべて確認済みで、根拠・権利・広告表示が整っている状態。</p></div></div>
- </div>
+  <div class="grid"><div class="card span-7"><h2>⚖️ 公開前 法務部チェック</h2><p class="muted">チェックを入れた項目だけ完了扱い。法的な保証ではなく、公開前の確認補助です。</p>
+   <label class="check"><input type="checkbox" data-legal="facts"><span>事実・日付・数字を信頼できる情報源で確認</span></label>
+   <label class="check"><input type="checkbox" data-legal="copyright"><span>引用は必要最小限で、出典とリンクを明記</span></label>
+   <label class="check"><input type="checkbox" data-legal="images"><span>画像の権利・利用条件を確認（人物写真は避ける）</span></label>
+   <label class="check"><input type="checkbox" data-legal="privacy"><span>個人情報・プライバシーに配慮</span></label>
+   <label class="check"><input type="checkbox" data-legal="defamation"><span>特定の個人・企業への断定的な非難がない</span></label>
+   <label class="check"><input type="checkbox" data-legal="ads"><span>広告・アフィリエイトであることを適切に表示</span></label>
+   <label class="check"><input type="checkbox" data-legal="platform"><span>noteの規約・広告先プログラムの条件を確認</span></label>
+   <div class="actions" style="margin-top:14px"><button class="btn" id="saveLegal">チェック状況を保存</button><button class="btn secondary" id="resetLegal">チェックを外す</button></div>
+  </div><div class="card span-5"><h2>📌 法務メモ</h2><div id="legalStatus" class="notice">まだ確認が完了していません。</div><div class="notice" style="margin-top:12px">重要: 「おすすめ」や「必ず効く」は誇大表現になりやすいので、根拠・比較・明示の考え方を守るとよいです。</div></div></div>
 </section>
 
 <section class="view" id="settings">
- <div class="grid"><div class="card span-6"><h2>💾 保存とバックアップ</h2><div class="notice">データはこの端末・ブラウザ内に保存されます。ブラウザのデータを消すと戻せません。</div><div class="actions"><button class="btn" id="exportAll">すべてバックアップ</button><button class="btn secondary" id="importBtn">バックアップを戻す</button></div><input type="file" id="importFile" accept="application/json" style="display:none"></div>
-  <div class="card span-6"><h2>🛠️ アプリ情報</h2><p><b>ARK GO v3</b></p><p class="muted">無料優先 / iPhone・PC対応 / 単一HTML構成</p><p class="muted">現状、リアルタイム検索や自動投稿は未実装です。GitHub public README からのAI補助は無料で使えます。</p></div>
- </div>
+  <div class="grid"><div class="card span-6"><h2>💾 保存とバックアップ</h2><div class="notice">データはこの端末・ブラウザ内に保存されます。ブラウザのデータ消去時は注意してください。</div><div class="actions"><button class="btn" id="exportAll">バックアップを出力</button><button class="btn secondary" id="importBtn">バックアップを読み込む</button><input type="file" id="importFile" accept="application/json" style="display:none"></div></div>
+  <div class="card span-6"><h2>🛠️ アプリ情報</h2><p><b>ARK GO v3</b></p><p class="muted">無料優先 / iPhone・PC対応 / 単一HTML構成</p><p class="muted">現状、リアルタイムトレンド検索・note自動投稿は未実装です。各機能は手動入力やローカル生成を前提にしています。</p></div></div>
 </section>
 <div class="footer">ARK GO · まずは小さく動かし、実績を見ながら進化させよう ☕</div>
 </div>
 <script>
 const KEY='ark_go_v3_state';
-const defaultState={
-  plans:[
-   {title:'今日の季節・記念日雑学 🍂',date:'',status:'企画中',note:'公式情報を確認し、読んだ人が誰かに話したくなる切り口にする。'},
-   {title:'宇宙・望遠鏡から広がる発見 🔭',date:'',status:'企画中',note:'過去の天体記事へ自然につなぐ。'},
-   {title:'暮らしに役立つ小さな工夫 ☕',date:'',status:'企画中',note:'初心者にも読みやすく、押しつけない語り口にする。'}
-  ],
-  metrics:[], articleCount:18, likes:27, legal:{}, draft:{title:'',body:'',headerIdea:''}
-};
+const defaultState={plans:[{title:'今日の季節・記念日雑学 🍂',date:'',status:'企画中',note:'公式情報を確認し、読んだ人が誰かに話したくなる切り口にする。'},{title:'宇宙・望遠鏡から広がる発見 🔭',date:'',status:'企画中',note:'過去の天体記事へ自然につなぐ。'},{title:'暮らしに役立つ小さな工夫 ☕',date:'',status:'企画中',note:'初心者にも読みやすく、押しつけない語り口にする。'}],metrics:[],articleCount:18,likes:27,legal:{},draft:{title:'',body:'',headerIdea:''}};
 let state=loadState();
 function loadState(){try{return {...structuredClone(defaultState),...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){return structuredClone(defaultState)}}
-function persist(){localStorage.setItem(KEY,JSON.stringify(state));renderDashboard()}
+function persist(){localStorage.setItem(KEY,JSON.stringify(state));renderDashboard();}
 function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function setView(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));}
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.goto)));
-function renderPlans(){const host=document.getElementById('postList');host.innerHTML=state.plans.map((p,i)=>`<div class="post" style="margin-bottom:10px"><div class="posthead"><div class="posttitle">投稿 ${i+1}</div><span class="pill green">${p.status||'企画中'}</span></div><div class="row" style="margin-top:8px"><input data-plan-index="${i}" data-plan-field="title" value="${esc(p.title||'')}" placeholder="タイトル"><input data-plan-index="${i}" data-plan-field="date" value="${esc(p.date||'')}" placeholder="予定日"><input data-plan-index="${i}" data-plan-field="note" value="${esc(p.note||'')}" placeholder="メモ"></div></div>`).join('')}
-function renderDashboard(){const latest=state.metrics?.[0];document.getElementById('dArticles').textContent=state.articleCount??18;document.getElementById('dImpressions').textContent=latest?latest.impressions??'—':'—';document.getElementById('dViews').textContent=latest?latest.views??'—':'—';document.getElementById('dLikes').textContent=state.likes??27;const planDone=state.plans.filter(p=>p.title||p.note).length;document.getElementById('planCount').textContent=`${planDone} / 3 件`;document.getElementById('planProgress').textContent=planDone===0?'まだ準備中です。':'投稿候補が揃っています。次の一手を決めましょう。';const next = [];if(!state.plans.some(p=>p.title||p.note)) next.push('投稿候補を3本用意する');if(!state.draft||!state.draft.body) next.push('記事の初稿を作る');if(!state.metrics.length) next.push('最新のnote実績を入力する');document.getElementById('nextActions').innerHTML=next.length?next.map((n,i)=>`<div class="item" style="margin-bottom:8px">${i+1}. ${esc(n)}</div>`).join(''):'<div class="empty">今の状態は順調です。次の一手は少しだけ整えるだけで十分です。</div>'}
-function updateCount(){const t=document.getElementById('articleBody').value;document.getElementById('charCount').textContent=t.length.toLocaleString('ja-JP');const minutes=Math.max(1,Math.ceil(t.length/500));document.getElementById('readTime').textContent=`${minutes}分`;}
-['articleTitle','articleBody','headerIdea'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{updateCount();state.draft={title:document.getElementById('articleTitle').value,body:document.getElementById('articleBody').value,headerIdea:document.getElementById('headerIdea').value};persist();}));
-function draftText(){return document.getElementById('articleTitle').value+'\n\n'+document.getElementById('articleBody').value}
+function renderPlans(){const host=document.getElementById('postList');host.innerHTML=state.plans.map((p,i)=>`<div class="post"><div class="posthead"><div class="posttitle">${esc(p.title||`タイトル ${i+1}`)}</div><span class="muted">${esc(p.status||'企画中')}</span></div><div class="row" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px;"><div><label>日付</label><input data-plan-field="date" data-plan-index="${i}" value="${esc(p.date||'')}" placeholder="例: 10/20"></div><div><label>ステータス</label><select data-plan-field="status" data-plan-index="${i}"><option value="企画中" ${p.status==='企画中'?'selected':''}>企画中</option><option value="執筆中" ${p.status==='執筆中'?'selected':''}>執筆中</option><option value="校正中" ${p.status==='校正中'?'selected':''}>校正中</option><option value="公開予定" ${p.status==='公開予定'?'selected':''}>公開予定</option></select></div><div><label>タイトル</label><input data-plan-field="title" data-plan-index="${i}" value="${esc(p.title||'')}" placeholder="例: 〇〇の雑学"></div></div><div style="margin-top:8px"><label>メモ</label><textarea data-plan-field="note" data-plan-index="${i}" placeholder="要点・方向性・注意点">${esc(p.note||'')}</textarea></div></div>`).join('');const done=state.plans.filter(p=>['執筆中','校正中','公開予定'].includes(p.status)).length;const total=state.plans.length;document.getElementById('planCount').textContent=`${done} / ${total} 件`;document.getElementById('planBar').style.width=`${(done/Math.max(total,1))*100}%`;}
+function renderDashboard(){const latest=state.metrics?.[0];document.getElementById('dArticles').textContent=state.articleCount??18;document.getElementById('dImpressions').textContent=latest?Number(latest.impressions||0).toLocaleString('ja-JP'):'—';document.getElementById('dViews').textContent=latest?Number(latest.views||0).toLocaleString('ja-JP'):'—';document.getElementById('dLikes').textContent=state.likes??27;const done=state.plans.filter(p=>['執筆中','校正中','公開予定'].includes(p.status)).length;const total=state.plans.length;document.getElementById('nextActions').innerHTML=`<div class="notice">今週の重点: ${done}/${total} 件が進行中。公開前の法務とタイトルの再確認を行うと効果が出やすいです。</div>`;}
+function updateCount(){const t=document.getElementById('articleBody').value;document.getElementById('charCount').textContent=t.length.toLocaleString('ja-JP');const minutes=Math.max(1,Math.ceil(t.length/500));document.getElementById('readMinutes').textContent=String(minutes);state.draft={title:document.getElementById('articleTitle').value,body:document.getElementById('articleBody').value,headerIdea:document.getElementById('headerIdea').value};persist();}
+['articleTitle','articleBody','headerIdea'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{updateCount();}));
+function draftText(){return document.getElementById('articleTitle').value+'
+
+'+document.getElementById('articleBody').value}
 async function copyText(text){try{await navigator.clipboard.writeText(text);alert('コピーしました ✅')}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();alert('コピーしました ✅')}}
-document.getElementById('copyArticle').onclick=()=>copyText(draftText());document.getElementById('copyImageIdea').onclick=()=>copyText(document.getElementById('headerIdea').value);document.getElementById('saveDraft').onclick=()=>{state.draft={title:document.getElementById('articleTitle').value,body:document.getElementById('articleBody').value,headerIdea:document.getElementById('headerIdea').value};persist();alert('下書きを保存しました');};
-document.getElementById('exportDraft').onclick=()=>{const content=(document.getElementById('articleTitle').value?document.getElementById('articleTitle').value+'\n\n':'')+document.getElementById('articleBody').value;const blob=new Blob([content],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ark-draft.txt';a.click();}
-function renderMetrics(){const host=document.getElementById('metricsTable');if(!state.metrics.length){host.innerHTML='<div class="empty">まだ実績がありません。上のフォームから記録しましょう。</div>';return}const rows=state.metrics.slice().reverse().map(m=>`<div class="post" style="margin-bottom:8px"><div class="posthead"><div class="posttitle">${esc(m.date||'日付なし')}</div><span class="pill green">PV ${Number(m.views||0).toLocaleString('ja-JP')}</span></div><div class="muted">表示 ${Number(m.impressions||0).toLocaleString('ja-JP')} / スキ ${Number(m.likes||0).toLocaleString('ja-JP')} / 売上 ${Number(m.sales||0).toLocaleString('ja-JP')}円</div></div>`).join('');host.innerHTML=rows;}
+document.getElementById('copyArticle').onclick=()=>copyText(draftText());document.getElementById('copyImageIdea').onclick=()=>copyText(document.getElementById('headerIdea').value);document.getElementById('saveDraft').onclick=()=>{state.draft={title:document.getElementById('articleTitle').value,body:document.getElementById('articleBody').value,headerIdea:document.getElementById('headerIdea').value};persist();alert('下書きを保存しました');};document.getElementById('exportDraft').onclick=()=>{const content=(document.getElementById('articleTitle').value?document.getElementById('articleTitle').value+'\n\n':'')+document.getElementById('articleBody').value;download('ARK_GO_draft.txt',content,'text/plain');};
+function renderMetrics(){const host=document.getElementById('metricsTable');if(!state.metrics.length){host.innerHTML='<div class="empty">まだ実績がありません。上のフォームから保存してください。</div>';return;}const rows=state.metrics.map(m=>`<div class="post"><div class="posthead"><div class="posttitle">${esc(m.date||'日付なし')}</div><span class="muted">売上 ${Number(m.sales||0).toLocaleString()}円</span></div><div class="muted" style="margin-top:8px">インプレッション ${Number(m.impressions||0).toLocaleString()} / PV ${Number(m.views||0).toLocaleString()} / スキ ${Number(m.likes||0).toLocaleString()} / 記事数 ${Number(m.articles||0).toLocaleString()}</div></div>`).join('');host.innerHTML=rows;let avg=0;if(state.metrics.length){const total=state.metrics.reduce((sum,m)=>sum+Number(m.views||0),0);avg=total/state.metrics.length;}document.getElementById('analysisNotes').innerHTML=`実績の平均PV: <b>${avg.toLocaleString('ja-JP')}</b>。改善の方向性としては、導入文の強さと見出しの明確さを見直すと伸びやすいです。`}
 document.getElementById('saveMetrics').onclick=()=>{const m={date:document.getElementById('metricDate').value.trim()||new Date().toLocaleDateString('ja-JP'),impressions:Number(document.getElementById('metricImpressions').value||0),views:Number(document.getElementById('metricViews').value||0),likes:Number(document.getElementById('metricLikes').value||0),articles:Number(document.getElementById('metricArticles').value||0),sales:Number(document.getElementById('metricSales').value||0)};state.metrics=[m,...(state.metrics||[])];persist();renderMetrics();alert('実績を保存しました');};
-document.getElementById('resetMetrics').onclick=()=>['metricDate','metricImpressions','metricViews','metricLikes','metricArticles','metricSales'].forEach(id=>document.getElementById(id).value='');
-document.getElementById('clearMetrics').onclick=()=>{if(confirm('実績履歴をすべて削除しますか？')){state.metrics=[];persist();renderMetrics();}};
-document.getElementById('exportCsv').onclick=()=>{const rows=[['date','impressions','views','likes','articles','sales'],...state.metrics.map(m=>[m.date,m.impressions,m.views,m.likes,m.articles,m.sales])];const csv=rows.map(r=>r.join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ark_metrics.csv';a.click();}
-function legalSync(){document.querySelectorAll('[data-legal]').forEach(el=>el.checked=!!state.legal[el.dataset.legal]);const count=Object.values(state.legal).filter(Boolean).length;document.getElementById('legalStatus').textContent=count===0?'まだ未確認です。':`確認済み ${count} / 7 項目`}
+document.getElementById('resetMetrics').onclick=()=>['metricDate','metricImpressions','metricViews','metricLikes','metricArticles','metricSales'].forEach(id=>document.getElementById(id).value='');document.getElementById('clearMetrics').onclick=()=>{if(confirm('実績履歴をすべて削除しますか？')){state.metrics=[];persist();renderMetrics();}};
+document.getElementById('exportCsv').onclick=()=>{const rows=[['date','impressions','views','likes','articles','sales'],...state.metrics.map(m=>[m.date,m.impressions,m.views,m.likes,m.articles,m.sales])];const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');download('ARK_GO_metrics.csv',csv,'text/csv');};
+function legalSync(){document.querySelectorAll('[data-legal]').forEach(el=>el.checked=!!state.legal[el.dataset.legal]);const count=Object.values(state.legal).filter(Boolean).length;const total=document.querySelectorAll('[data-legal]').length;document.getElementById('legalStatus').textContent=`${count} / ${total} 項目確認済み`}
 document.querySelectorAll('[data-legal]').forEach(el=>el.addEventListener('change',()=>{state.legal[el.dataset.legal]=el.checked;persist();legalSync()}));
 document.getElementById('saveLegal').onclick=()=>{persist();legalSync();alert('法務チェックを保存しました');};
 document.getElementById('resetLegal').onclick=()=>{state.legal={};persist();legalSync();};
-function download(name,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),0)}
+function download(name,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+document.getElementById('exportTop').onclick=()=>download('ARK_GO_backup.json',JSON.stringify(state,null,2),'application/json');
 document.getElementById('exportAll').onclick=()=>download('ARK_GO_backup.json',JSON.stringify(state,null,2),'application/json');
 document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();
-document.getElementById('importFile').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const json=JSON.parse(await file.text());state={...defaultState,...json};persist();renderPlans();renderMetrics();legalSync();alert('バックアップを復元しました');}catch{alert('バックアップの読み込みに失敗しました');}};
+document.getElementById('importFile').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const json=JSON.parse(await file.text());state={...defaultState,...json};persist();renderPlans();renderMetrics();legalSync();alert('バックアップを読み込みました');}catch(err){alert('バックアップの読み込みに失敗しました');}finally{e.target.value='';}};
 document.getElementById('savePlans').onclick=()=>{persist();renderPlans();alert('投稿予定を保存しました');};
 document.getElementById('clearPlans').onclick=()=>{if(confirm('投稿予定を初期案に戻しますか？')){state.plans=structuredClone(defaultState.plans);persist();renderPlans();}};
-document.querySelectorAll('[data-plan-field]').forEach(el=>el.addEventListener('input',()=>{const idx=Number(el.dataset.planIndex);const field=el.dataset.planField;state.plans[idx]=state.plans[idx]||{title:'',theme:'',date:'',status:'企画中'};state.plans[idx][field]=el.value;persist();renderPlans();}));
+document.querySelectorAll('[data-plan-field]').forEach(el=>el.addEventListener('input',()=>{const idx=Number(el.dataset.planIndex);const field=el.dataset.planField;state.plans[idx]=state.plans[idx]||{title:'',date:'',status:'企画中',note:''};state.plans[idx][field]=el.value;persist();renderPlans();}));
 document.getElementById('quickNew').onclick=()=>setView('editor');
-function makeTrendPrompt(){const topic=document.getElementById('trendTopic')?.value||'季節の話題';const goal=document.getElementById('trendGoal')?.value||'読者に役立つ無料note';const prompt=`ARKトレンド班として、次のテーマについて、日本向けのnoteで使える調査依頼文を作ってください。\n\nテーマ: ${topic}\n目的: ${goal}\n\n以下を含めてください:\n- 直近の話題の切り口\n- 事実確認の観点\n- 役立つ見出し案\n- 参考になる指摘\n\n日本語で簡潔に。`;document.getElementById('trendPrompt').value=prompt;}
-const trendAnchor = document.createElement('div');trendAnchor.style.display='none';
-const trendTopicInput = document.createElement('input');trendTopicInput.id='trendTopic';trendTopicInput.value='季節の話題';trendTopicInput.style.display='none';
-const trendGoalInput = document.createElement('input');trendGoalInput.id='trendGoal';trendGoalInput.value='読者に役立つ無料note';trendGoalInput.style.display='none';
-trendAnchor.appendChild(trendTopicInput);trendAnchor.appendChild(trendGoalInput);document.body.appendChild(trendAnchor);
-document.getElementById('makeTrendPrompt').onclick=()=>{makeTrendPrompt();};
-document.getElementById('copyTrendPrompt').onclick=()=>copyText(document.getElementById('trendPrompt').value);
-
-// --- 無料版 AI 自動化（GitHub public README + Ollama）---
-async function fetchPublicReadme(owner, repo) {
-  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/readme`);
-  if (!res.ok) throw new Error('README not found');
-  const data = await res.json();
-  return atob(data.content.replace(/\n/g, ''));
-}
-
-async function askOllama(prompt) {
-  const res = await fetch('http://localhost:11434/api/generate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ model: 'llama3.2', prompt, stream: false })
-  });
-  if (!res.ok) throw new Error('Ollama request failed');
-  const data = await res.json();
-  return data.response;
-}
-
-function saveIdea(resultText) {
-  const saved = JSON.parse(localStorage.getItem('ark_idea_cache') || '[]');
-  saved.push({ createdAt: new Date().toISOString(), result: resultText });
-  localStorage.setItem('ark_idea_cache', JSON.stringify(saved));
-}
-
-function applyIdeaToPlans(resultText) {
-  const plans = JSON.parse(localStorage.getItem('ark_posts') || '[]');
-  const safePlans = Array.isArray(plans) && plans.length ? plans : [
-    { title: '', theme: '', date: '', status: '企画中' },
-    { title: '', theme: '', date: '', status: '企画中' },
-    { title: '', theme: '', date: '', status: '企画中' }
-  ];
-
-  const lines = resultText.split(/\n+/).map(x => x.trim()).filter(Boolean);
-  let idx = 0;
-  for (const line of lines) {
-    if (idx >= safePlans.length) break;
-    if (!safePlans[idx].title) {
-      safePlans[idx].title = line.slice(0, 80);
-      safePlans[idx].theme = 'AI生成候補';
-      safePlans[idx].status = '企画中';
-    }
-    idx++;
-  }
-
-  localStorage.setItem('ark_posts', JSON.stringify(safePlans));
-}
-
-async function generateArkIdea() {
-  try {
-    const readme = await fetchPublicReadme('buildbirudo-dev', 'ARK-GO');
-    const prompt = `以下はプロダクトのREADMEです。これをもとに、note向けの記事候補を3本作ってください。\n\nREADME:\n${readme}`;
-    const result = await askOllama(prompt);
-    saveIdea(result);
-    const out = document.getElementById('aiIdeaOutput');
-    if (out) out.innerText = result;
-    applyIdeaToPlans(result);
-    renderPlans();
-    alert('AI記事候補を生成して保存しました');
-  } catch (e) {
-    console.error(e);
-    alert('生成に失敗しました: ' + e.message);
-  }
-}
-
-function initArkAutoIdea() {
-  const container = document.createElement('div');
-  container.style.marginTop = '20px';
-  container.style.padding = '16px';
-  container.style.border = '1px solid #dde5f0';
-  container.style.borderRadius = '14px';
-  container.style.background = '#f8fafc';
-
-  const title = document.createElement('div');
-  title.textContent = 'AI企画室（無料版）';
-  title.style.fontWeight = '700';
-  title.style.marginBottom = '10px';
-
-  const button = document.createElement('button');
-  button.textContent = 'AI記事候補を自動生成';
-  button.className = 'btn';
-  button.onclick = generateArkIdea;
-
-  const output = document.createElement('pre');
-  output.id = 'aiIdeaOutput';
-  output.style.whiteSpace = 'pre-wrap';
-  output.style.fontSize = '14px';
-  output.style.lineHeight = '1.6';
-  output.style.marginTop = '12px';
-  output.style.background = '#fff';
-  output.style.padding = '12px';
-  output.style.borderRadius = '10px';
-  output.style.border = '1px solid #e5e7eb';
-
-  container.appendChild(title);
-  container.appendChild(button);
-  container.appendChild(output);
-
-  const app = document.querySelector('.app') || document.body;
-  app.appendChild(container);
-
-  const cached = JSON.parse(localStorage.getItem('ark_idea_cache') || '[]');
-  if (cached.length) {
-    output.innerText = cached[cached.length - 1].result;
-  }
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initArkAutoIdea);
-} else {
-  initArkAutoIdea();
-}
-
-// 初期化
-state.plans = state.plans || defaultState.plans;
-state.metrics = state.metrics || [];
-state.legal = state.legal || {};
-state.draft = state.draft || { title: '', body: '', headerIdea: '' };
-renderPlans();
-renderMetrics();
-legalSync();
-renderDashboard();
-updateCount();
+function makeTrendPrompt(){const topic=document.getElementById('trendTopic')?.value||'季節の話題';const goal=document.getElementById('trendGoal')?.value||'読者に役立つ無料note';const prompt=`以下の条件で、noteに関する調査依頼文を作ってください。\n- 目的: ${goal}\n- トピック: ${topic}\n- 出力形式: 1) 背景 2) 具体的な調査観点 3) 記事案 4) 収益化の可能性\n- 文章は簡潔で実務に使える形にする`;document.getElementById('trendPrompt').value=prompt;}
+const trendAnchor=document.createElement('div');trendAnchor.style.display='none';const trendTopicInput=document.createElement('input');trendTopicInput.id='trendTopic';trendTopicInput.value='季節の話題';const trendGoalInput=document.createElement('input');trendGoalInput.id='trendGoal';trendGoalInput.value='読者に役立つ無料note';trendAnchor.appendChild(trendTopicInput);trendAnchor.appendChild(trendGoalInput);document.body.appendChild(trendAnchor);document.getElementById('makeTrendPrompt').onclick=()=>makeTrendPrompt();document.getElementById('copyTrendPrompt').onclick=()=>copyText(document.getElementById('trendPrompt').value);
+async function fetchPublicReadme(owner, repo) {const res=await fetch(`https://api.github.com/repos/${owner}/${repo}/readme`);if(!res.ok) throw new Error('README not found');const data=await res.json();return atob(data.content.replace(/\n/g,''));}
+async function askOllama(prompt){const res=await fetch('http://localhost:11434/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'llama3.2',prompt,stream:false})});if(!res.ok) throw new Error('Ollama request failed');const data=await res.json();return data.response;}
+function saveIdea(resultText){const saved=JSON.parse(localStorage.getItem('ark_idea_cache')||'[]');saved.push({createdAt:new Date().toISOString(),result:resultText});localStorage.setItem('ark_idea_cache',JSON.stringify(saved));}
+function applyIdeaToPlans(resultText){const plans=JSON.parse(localStorage.getItem('ark_posts')||'[]');const safePlans=Array.isArray(plans)&&plans.length?plans:[{title:'',theme:'',date:'',status:'企画中'},{title:'',theme:'',date:'',status:'企画中'},{title:'',theme:'',date:'',status:'企画中'}];const lines=resultText.split(/\n+/).map(x=>x.trim()).filter(Boolean);let idx=0;for(const line of lines){if(idx>=safePlans.length) break;if(!safePlans[idx].title){safePlans[idx].title=line.slice(0,80);safePlans[idx].theme='AI生成候補';safePlans[idx].status='企画中';}idx++;}localStorage.setItem('ark_posts',JSON.stringify(safePlans));}
+async function generateArkIdea(){try{const readme=await fetchPublicReadme('buildbirudo-dev','ARK-GO');const prompt=`以下はプロダクトのREADMEです。これをもとに、note向けの記事候補を3本作ってください。\n\nREADME:\n${readme}`;const result=await askOllama(prompt);saveIdea(result);const out=document.getElementById('aiIdeaOutput');if(out) out.innerText=result;applyIdeaToPlans(result);renderPlans();alert('AI記事候補を生成して保存しました');}catch(e){console.error(e);alert('生成に失敗しました: '+e.message;}}}
+function initArkAutoIdea(){const container=document.createElement('div');container.style.marginTop='20px';container.style.padding='16px';container.style.border='1px solid #dde5f0';container.style.borderRadius='14px';container.style.background='#f8fafc';const title=document.createElement('div');title.textContent='AI企画室（無料版）';title.style.fontWeight='700';title.style.marginBottom='10px';const button=document.createElement('button');button.textContent='AI記事候補を自動生成';button.className='btn';button.onclick=generateArkIdea;const output=document.createElement('pre');output.id='aiIdeaOutput';output.style.whiteSpace='pre-wrap';output.style.fontSize='14px';output.style.lineHeight='1.6';output.style.marginTop='12px';output.style.background='#fff';output.style.padding='12px';output.style.borderRadius='10px';output.style.border='1px solid #e5e7eb';container.appendChild(title);container.appendChild(button);container.appendChild(output);const app=document.querySelector('.app')||document.body;app.appendChild(container);const cached=JSON.parse(localStorage.getItem('ark_idea_cache')||'[]');if(cached.length){output.innerText=cached[cached.length-1].result;}}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initArkAutoIdea);}else{initArkAutoIdea();}
+state.plans=state.plans||defaultState.plans;state.metrics=state.metrics||[];state.legal=state.legal||{};state.draft=state.draft||{title:'',body:'',headerIdea:''};renderPlans();renderMetrics();legalSync();renderDashboard();updateCount();
 </script>
 </body>
 </html>
