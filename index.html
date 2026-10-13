@@ -1,4 +1,491 @@
-<style>
-:root{--bg:#f3f5f9;--panel:#fff;--ink:#172033;--muted:#697386;--line:#e4e8f0;--accent:#5b61e6;--accent2:#eef0ff;--green:#13845b;--amber:#a45b00;--red:#b42318;--shadow:0 8px 28px rgba(26,38,68,.07)}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#eff3ff,#f7f9fc 180px);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}button,input,textarea,select{font:inherit}button{cursor:pointer}.app{max-width:1100px;margin:auto;padding:16px}.hero{background:linear-gradient(135deg,#141c31,#343d79);color:#fff;border-radius:22px;padding:22px;box-shadow:var(--shadow)}.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-size:12px;letter-spacing:.16em;opacity:.8;font-weight:800}.tag{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:999px;padding:6px 10px;font-size:11px}.hero h1{margin:14px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.1}.hero p{max-width:700px;margin:0;color:rgba(255,255,255,.86)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.btn{border:none;border-radius:12px;padding:10px 14px;font-weight:700;background:var(--accent);color:#fff;box-shadow:0 10px 18px rgba(91,97,230,.2)}.btn.secondary{background:var(--accent2);color:#3947d7}.btn.outline{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}.nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 14px}.nav button{padding:10px 14px;border:none;border-radius:12px;background:#fff;border:1px solid var(--line);color:var(--ink);font-weight:700}.nav button.active{background:var(--accent2);color:var(--accent);border-color:rgba(91,97,230,.18)}.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);grid-column:span 12}.card h2{margin:0 0 12px;font-size:1.08rem}.span-12{grid-column:span 12}.span-8{grid-column:span 8}.span-7{grid-column:span 7}.span-6{grid-column:span 6}.span-5{grid-column:span 5}.span-4{grid-column:span 4}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stat{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:14px}.label{color:var(--muted);font-size:12px}.num{font-size:clamp(1.5rem,2vw,2.3rem);font-weight:800;margin:8px 0 2px}.muted{color:var(--muted)}.notice{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px 14px}.checklist{display:grid;gap:10px}.check{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#f9fafb}.check input{margin-top:4px}label{display:block;font-weight:600;margin:12px 0 7px}input,textarea,select{width:100%;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;color:var(--ink)}textarea{min-height:150px}.post{border:1px solid var(--line);border-radius:12px;padding:12px;background:#f9fafb;margin-bottom:10px}.posthead{display:flex;justify-content:space-between;gap:10px;align-items:center}.posttitle{font-weight:700}.footer{margin-top:24px;text-align:center;color:var(--muted);font-size:12px}.empty{color:var(--muted);padding:12px 0}.offline-banner{display:none;position:sticky;top:0;z-index:100;background:#111827;color:#fff;padding:10px 14px;text-align:center;font-size:12px;font-weight:700}.offline-banner.visible{display:block}.legal-badge{display:inline-block;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:800;margin-bottom:8px;border:1px solid var(--line)}.legal-badge.safe{background:#e9fff4;color:var(--green);border-color:#cdeed9}.legal-badge.warn{background:#fff7e6;color:var(--amber);border-color:#f5ddad}.legal-badge.alert{background:#fff1f1;color:var(--red);border-color:#f4cfce}.legal-progress{height:12px;border-radius:999px;background:#eef2f7;overflow:hidden;border:1px solid var(--line);margin-top:10px}.legal-progress > span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#5b61e6,#8f95ff)}@media(max-width:720px){.app{padding:10px}.hero{padding:18px;border-radius:18px}.grid{gap:10px}.span-8,.span-7,.span-6,.span-5,.span-4,.span-12{grid-column:span 12}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-</style>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARK-GO</title>
+  <style>
+    :root{
+      --bg:#f3f5f9;--panel:#fff;--ink:#172033;--muted:#697386;--line:#e4e8f0;--accent:#5b61e6;--accent2:#eef0ff;--green:#13845b;--amber:#a45b00;--red:#b42318;--shadow:0 8px 28px rgba(26,38,68,.07)
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#eff3ff,#f7f9fc 180px);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+    .shell{max-width:1100px;margin:24px auto;padding:0 18px 42px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c82ff);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;box-shadow:var(--shadow)}
+    h1{margin:0;font-size:clamp(1.6rem,3vw,2.1rem)}
+    .badge{background:var(--accent2);color:var(--accent);padding:8px 12px;border-radius:999px;font-weight:700;font-size:.8rem}
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:20px}
+    .label{display:block;font-size:.82rem;color:var(--muted);font-weight:700;margin-bottom:8px}
+    .field{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff;color:var(--ink);font:inherit}
+    textarea.field{min-height:180px;resize:vertical}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;transition:.2s ease}
+    button:hover{opacity:.96;transform:translateY(-1px)}
+    .primary{background:var(--accent);color:#fff}
+    .success{background:var(--green);color:#fff}
+    .muted{background:#edf1f7;color:var(--ink)}
+    .danger{background:#fff1f2;color:var(--red)}
+    .mini{padding:8px 10px;font-size:.85rem}
+    .toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+    .checklist{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+    .checklist li{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+    .status{font-weight:700}
+    .ok{color:var(--green)}
+    .warn{color:var(--amber)}
+    .bad{color:var(--red)}
+    .stack{display:grid;gap:18px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .stat{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:14px}
+    .stat .num{font-size:1.4rem;font-weight:800;margin-top:6px}
+    .hide{display:none!important}
+    .ark-ai{margin-top:18px;border:1px solid var(--line);border-radius:16px;background:var(--panel);box-shadow:var(--shadow);padding:16px}
+    .ark-ai h3{margin:0 0 8px 0;font-size:1.05rem;color:var(--ink);display:inline-block}
+    .ark-ai .badge{padding:5px 10px;border-radius:999px;background:var(--accent2);color:var(--accent);font-weight:700;font-size:0.75rem}
+    .ark-ai textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:0.98rem;resize:vertical;background:#fff;color:var(--ink)}
+    .ark-ai .row{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;align-items:center}
+    .ark-ai button{border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
+    .ark-ai .gen{background:var(--accent);color:#fff}
+    .ark-ai .insert{background:var(--green);color:#fff}
+    .ark-ai .copy{background:#6b6eff;color:#fff}
+    .ark-ai .small{padding:6px 10px;font-weight:600;border-radius:8px}
+    .ark-ai .result{margin-top:12px;white-space:pre-wrap;line-height:1.7;color:var(--ink);background:#f8faff;border:1px solid var(--line);border-radius:12px;padding:12px;min-height:48px}
+    .ark-ai .side{margin-top:12px;display:flex;gap:12px;align-items:flex-start}
+    .ark-ai .panel{flex:1;min-width:220px}
+    .ark-ai .history{max-height:220px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff}
+    .ark-ai .hist-item{border-bottom:1px dashed #eee;padding:8px 4px}
+    .ark-ai .hist-item:last-child{border-bottom:none}
+    .ark-ai .meta{font-size:0.8rem;color:var(--muted)}
+    .ark-ai select,.ark-ai input{padding:8px 10px;border-radius:8px;border:1px solid var(--line)}
+    .ark-ai .flex{display:flex;gap:8px;align-items:center}
+    .ark-ai .muted{color:var(--muted);font-size:0.9rem}
+    @media (max-width: 780px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.topbar{flex-direction:column;align-items:flex-start}.ark-ai .side{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">A</div>
+        <h1>ARK-GO</h1>
+      </div>
+      <div class="badge">記事運用と法務確認の支援アプリ</div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <div class="toolbar">
+          <strong>記事原稿</strong>
+          <div class="row" style="margin-top:0">
+            <button class="muted mini" type="button" id="saveDraftBtn">下書き保存</button>
+            <button class="primary mini" type="button" id="copyTextBtn">本文コピー</button>
+          </div>
+        </div>
+
+        <label class="label" for="articleTitle">タイトル</label>
+        <input id="articleTitle" class="field" type="text" placeholder="記事タイトルを入力" />
+
+        <div class="row" style="margin-top:16px">
+          <div style="flex:1">
+            <label class="label" for="articleCategory">カテゴリ</label>
+            <input id="articleCategory" class="field" type="text" placeholder="例: SEO, 法務, 運用" />
+          </div>
+          <div style="flex:1">
+            <label class="label" for="publishDate">公開予定日</label>
+            <input id="publishDate" class="field" type="date" />
+          </div>
+        </div>
+
+        <div style="margin-top:16px">
+          <label class="label" for="articleBody">本文</label>
+          <textarea id="articleBody" class="field" placeholder="記事本文をここに入力"></textarea>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="panel">
+          <div class="toolbar">
+            <strong>法務確認</strong>
+            <button class="muted mini" type="button" id="checkLawBtn">チェック開始</button>
+          </div>
+          <ul class="checklist">
+            <li><span>著作権リスク</span><span class="status ok" id="riskCopy">OK</span></li>
+            <li><span>個人情報の扱い</span><span class="status ok" id="riskPrivacy">OK</span></li>
+            <li><span>誹謗中傷/表現の慎重さ</span><span class="status warn" id="riskDefame">要確認</span></li>
+            <li><span>事実確認の明確性</span><span class="status warn" id="riskFact">要確認</span></li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="toolbar">
+            <strong>要約</strong>
+            <button class="primary mini" type="button" id="summarizeBtn">要約生成</button>
+          </div>
+          <textarea id="summaryBox" class="field" rows="6" placeholder="要約がここに表示されます"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="ark-ai">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <h3>AI生成（Ollama）</h3>
+          <span class="muted" style="display:inline-block; margin-left:10px;">無料・ローカル</span>
+        </div>
+        <span class="badge">無料</span>
+      </div>
+
+      <div style="margin-top:10px;">
+        <label class="muted">API エンドポイント（デフォルト: http://localhost:11434）</label>
+        <div class="row">
+          <input id="aiEndpoint" type="text" placeholder="http://localhost:11434" style="flex:1" />
+          <button id="saveEndpoint" class="small muted" type="button">保存</button>
+          <button id="checkEndpoint" class="small muted" type="button">接続確認</button>
+        </div>
+        <div id="endpointStatus" class="muted" style="margin-top:6px;"></div>
+      </div>
+
+      <div style="margin-top:12px;">
+        <label class="muted">テンプレート</label>
+        <div class="row">
+          <select id="templateSelect" style="flex:1; min-width:220px;">
+            <option value="">テンプレートを選択</option>
+          </select>
+          <button id="applyTemplate" class="small muted" type="button">適用</button>
+          <button id="openTplEditor" class="small muted" type="button">編集</button>
+        </div>
+      </div>
+
+      <textarea id="aiPrompt" rows="6" placeholder="記事の方向性や見出し、読者属性などを入力"></textarea>
+
+      <div class="row">
+        <button id="runAiBtn" class="gen" type="button">AI生成</button>
+        <button id="insertAiResultBtn" class="insert" type="button">本文へ挿入</button>
+        <button id="copyResultBtn" class="copy" type="button">結果をコピー</button>
+        <div class="muted" style="margin-left:auto">履歴 / テンプレート付き</div>
+      </div>
+
+      <div id="aiResult" class="result">生成結果がここに表示されます</div>
+
+      <div class="side">
+        <div class="panel" style="flex:0.6;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong>生成履歴</strong>
+            <div class="flex">
+              <button id="clearHistory" class="small muted" type="button">履歴クリア</button>
+              <button id="exportHistory" class="small muted" type="button">エクスポート</button>
+            </div>
+          </div>
+          <div class="history" id="aiHistory"></div>
+        </div>
+
+        <div class="panel" style="flex:0.4;">
+          <strong>テンプレート一覧</strong>
+          <div style="margin-top:8px; font-size:0.95rem; color:var(--muted);">選んで「適用」するとプロンプト欄に反映されます</div>
+          <div id="tplList" style="margin-top:8px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const LS_KEYS = { ENDPOINT:'ark_ai_endpoint', HISTORY:'ark_ai_history', TEMPLATES:'ark_ai_templates', DRAFT:'ark_go_draft' };
+      const DEFAULT_ENDPOINT = 'http://localhost:11434';
+
+      const endpointInput = document.getElementById('aiEndpoint');
+      const saveEndpointBtn = document.getElementById('saveEndpoint');
+      const checkEndpointBtn = document.getElementById('checkEndpoint');
+      const endpointStatus = document.getElementById('endpointStatus');
+      const templateSelect = document.getElementById('templateSelect');
+      const applyTemplateBtn = document.getElementById('applyTemplate');
+      const openTplEditorBtn = document.getElementById('openTplEditor');
+      const aiPrompt = document.getElementById('aiPrompt');
+      const runAiBtn = document.getElementById('runAiBtn');
+      const aiResult = document.getElementById('aiResult');
+      const insertBtn = document.getElementById('insertAiResultBtn');
+      const copyBtn = document.getElementById('copyResultBtn');
+      const aiHistoryEl = document.getElementById('aiHistory');
+      const clearHistoryBtn = document.getElementById('clearHistory');
+      const exportHistoryBtn = document.getElementById('exportHistory');
+      const tplListEl = document.getElementById('tplList');
+
+      const DEFAULT_TEMPLATES = [
+        { id:'tpl_note_full', name:'note向け（タイトル+見出し+導入+本文）', text:`以下のテーマで、note向けの文章を作成してください。
+- タイトル候補（3つ）
+- 3つの見出し
+- 200〜300字の導入文
+- 各見出しに対応する本文（各200〜300字）
+- 最後に要点3つ` },
+        { id:'tpl_title_outline', name:'タイトル＋アウトライン', text:`以下のテーマで
+- タイトル候補（5つ）
+- 記事のアウトライン（見出し3つ＋一言説明）
+を作成してください。` },
+        { id:'tpl_summary', name:'短い要約（100字以内）', text:'次の文章を100字以内で要約してください：\n' },
+        { id:'tpl_legal_check', name:'法務チェック用サマリ', text:'以下の文章について、法務観点の注意点を箇条書きで示してください（著作権、誹謗中傷、個人情報、誤解を招く表現など）。' }
+      ];
+
+      function loadLS(key){ try { return JSON.parse(localStorage.getItem(key)); } catch (e) { return null; } }
+      function saveLS(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
+      function uid(){ return 'h_' + Date.now() + '_' + Math.random().toString(36).slice(2,9); }
+
+      function loadEndpoint(){
+        const saved = localStorage.getItem(LS_KEYS.ENDPOINT);
+        endpointInput.value = saved || DEFAULT_ENDPOINT;
+      }
+
+      function saveEndpoint(){
+        const value = (endpointInput.value || '').trim() || DEFAULT_ENDPOINT;
+        localStorage.setItem(LS_KEYS.ENDPOINT, value);
+        endpointStatus.textContent = '保存しました: ' + value;
+        setTimeout(()=> endpointStatus.textContent = '', 2500);
+      }
+
+      async function checkEndpoint(){
+        const endpoint = (localStorage.getItem(LS_KEYS.ENDPOINT) || DEFAULT_ENDPOINT).replace(/\/$/, '');
+        const url = endpoint + '/api/tags';
+        endpointStatus.textContent = '接続確認中...';
+        try {
+          const res = await fetch(url);
+          if(!res.ok) throw new Error(String(res.status));
+          endpointStatus.textContent = '接続OK';
+        } catch (e) {
+          endpointStatus.textContent = '接続失敗: ' + e.message;
+        }
+        setTimeout(()=> endpointStatus.textContent = '', 3000);
+      }
+
+      function loadTemplates(){
+        let templates = loadLS(LS_KEYS.TEMPLATES);
+        if(!Array.isArray(templates) || templates.length === 0){
+          templates = DEFAULT_TEMPLATES;
+          saveLS(LS_KEYS.TEMPLATES, templates);
+        }
+        templateSelect.innerHTML = '<option value="">テンプレートを選択</option>';
+        tplListEl.innerHTML = '';
+        templates.forEach(tp => {
+          const opt = document.createElement('option');
+          opt.value = tp.id; opt.textContent = tp.name;
+          templateSelect.appendChild(opt);
+
+          const wrap = document.createElement('div'); wrap.style.padding='6px 4px';
+          const title = document.createElement('div'); title.textContent = tp.name; title.style.fontWeight='700';
+          const txt = document.createElement('div'); txt.textContent = tp.text; txt.style.fontSize='0.9rem'; txt.style.color='var(--muted)'; txt.style.marginTop='4px';
+          const btns = document.createElement('div'); btns.style.marginTop='6px';
+          const useBtn = document.createElement('button'); useBtn.textContent='適用'; useBtn.className='small'; useBtn.type='button'; useBtn.onclick = () => { aiPrompt.value = tp.text; };
+          btns.appendChild(useBtn);
+          wrap.appendChild(title); wrap.appendChild(txt); wrap.appendChild(btns);
+          tplListEl.appendChild(wrap);
+        });
+      }
+
+      function renderHistory(history){
+        aiHistoryEl.innerHTML = '';
+        if(!history || history.length === 0){ aiHistoryEl.innerHTML = '<div class="muted">履歴はまだありません</div>'; return; }
+        history.forEach(item => {
+          const div = document.createElement('div'); div.className='hist-item';
+          const time = document.createElement('div'); time.className='meta'; time.textContent = new Date(item.ts).toLocaleString();
+          const prompt = document.createElement('div'); prompt.textContent = (item.prompt || '').slice(0, 80) + ((item.prompt || '').length > 80 ? '…' : ''); prompt.style.marginTop='6px';
+          const result = document.createElement('div'); result.textContent = (item.result || '').slice(0, 200) + (((item.result || '').length > 200) ? '…' : ''); result.style.marginTop='6px';
+          const btns = document.createElement('div'); btns.style.marginTop='6px';
+          const loadBtn = document.createElement('button'); loadBtn.type='button'; loadBtn.className='small'; loadBtn.textContent='ロード'; loadBtn.onclick = () => { aiPrompt.value = item.prompt; };
+          const insertBtn = document.createElement('button'); insertBtn.type='button'; insertBtn.className='small'; insertBtn.textContent='挿入'; insertBtn.onclick = () => insertToArticle(item.result);
+          const copyBtn = document.createElement('button'); copyBtn.type='button'; copyBtn.className='small'; copyBtn.textContent='コピー'; copyBtn.onclick = () => navigator.clipboard && navigator.clipboard.writeText(item.result || '');
+          const delBtn = document.createElement('button'); delBtn.type='button'; delBtn.className='small'; delBtn.textContent='削除'; delBtn.onclick = () => deleteHistoryItem(item.id);
+          btns.appendChild(loadBtn); btns.appendChild(insertBtn); btns.appendChild(copyBtn); btns.appendChild(delBtn);
+          div.appendChild(time); div.appendChild(prompt); div.appendChild(result); div.appendChild(btns);
+          aiHistoryEl.appendChild(div);
+        });
+      }
+
+      function loadHistory(){
+        const history = loadLS(LS_KEYS.HISTORY) || [];
+        renderHistory(history);
+      }
+
+      function saveHistoryEntry(entry){
+        const history = loadLS(LS_KEYS.HISTORY) || [];
+        history.unshift(entry);
+        if(history.length > 200) history.length = 200;
+        saveLS(LS_KEYS.HISTORY, history);
+        renderHistory(history);
+      }
+
+      function deleteHistoryItem(id){
+        let history = loadLS(LS_KEYS.HISTORY) || [];
+        history = history.filter(item => item.id !== id);
+        saveLS(LS_KEYS.HISTORY, history);
+        renderHistory(history);
+      }
+
+      function clearHistory(){
+        if(!confirm('履歴を削除しますか？')) return;
+        localStorage.removeItem(LS_KEYS.HISTORY);
+        renderHistory([]);
+      }
+
+      function exportHistory(){
+        const history = loadLS(LS_KEYS.HISTORY) || [];
+        const blob = new Blob([JSON.stringify(history, null, 2)], { type:'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'ark_ai_history.json'; a.click(); URL.revokeObjectURL(url);
+      }
+
+      function getTargetArticleElement(){
+        const candidates = ['articleBody','noteText','mainText'];
+        for(const id of candidates){ const el = document.getElementById(id); if(el) return el; }
+        const textareas = Array.from(document.querySelectorAll('textarea')).filter(t => t.id !== 'aiPrompt' && t.id !== 'summaryBox');
+        return textareas[0] || document.getElementById('articleBody');
+      }
+
+      function insertToArticle(text){
+        if(!text) { alert('挿入するテキストがありません'); return; }
+        const target = getTargetArticleElement();
+        if(!target){ alert('本文入力欄が見つかりません'); return; }
+        const existing = target.value || '';
+        target.value = existing ? existing + '\n\n' + text : text;
+        target.focus();
+        aiResult.textContent = '本文に挿入しました。';
+      }
+
+      async function callOllama(prompt){
+        const endpoint = (localStorage.getItem(LS_KEYS.ENDPOINT) || DEFAULT_ENDPOINT).replace(/\/$/, '');
+        const url = endpoint + '/api/generate';
+        const res = await fetch(url, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ model:'llama3.2', prompt, stream:false })
+        });
+        if(!res.ok){
+          const text = await res.text().catch(()=>res.statusText || '');
+          throw new Error('Ollama API error: ' + res.status + ' ' + text);
+        }
+        const data = await res.json();
+        return data.response || data.output || data.result || JSON.stringify(data);
+      }
+
+      function saveDraft(){
+        const draft = {
+          title: document.getElementById('articleTitle').value,
+          category: document.getElementById('articleCategory').value,
+          publishDate: document.getElementById('publishDate').value,
+          body: document.getElementById('articleBody').value,
+          summary: document.getElementById('summaryBox').value,
+          savedAt: Date.now()
+        };
+        localStorage.setItem(LS_KEYS.DRAFT, JSON.stringify(draft));
+        alert('下書きを保存しました');
+      }
+
+      function loadDraft(){
+        const draft = loadLS(LS_KEYS.DRAFT);
+        if(!draft) return;
+        document.getElementById('articleTitle').value = draft.title || '';
+        document.getElementById('articleCategory').value = draft.category || '';
+        document.getElementById('publishDate').value = draft.publishDate || '';
+        document.getElementById('articleBody').value = draft.body || '';
+        document.getElementById('summaryBox').value = draft.summary || '';
+      }
+
+      function copyText(){
+        const text = document.getElementById('articleBody').value || '';
+        if(!text) { alert('本文が空です'); return; }
+        navigator.clipboard && navigator.clipboard.writeText(text).then(() => alert('本文をコピーしました')).catch(() => alert('コピーに失敗しました'));
+      }
+
+      function checkLaw(){
+        const text = document.getElementById('articleBody').value || '';
+        const statuses = {
+          copy: text.includes('著作') || text.length > 150 ? 'OK' : 'OK',
+          privacy: text.includes('住所') || text.includes('電話') || text.includes('メール') ? '要確認' : 'OK',
+          defame: /誹謗|中傷|悪口|無断/i.test(text) ? '要確認' : 'OK',
+          fact: /推測|たぶん|おそらく/i.test(text) ? '要確認' : 'OK'
+        };
+
+        document.getElementById('riskCopy').textContent = statuses.copy;
+        document.getElementById('riskCopy').className = 'status ' + (statuses.copy === 'OK' ? 'ok' : 'warn');
+        document.getElementById('riskPrivacy').textContent = statuses.privacy;
+        document.getElementById('riskPrivacy').className = 'status ' + (statuses.privacy === 'OK' ? 'ok' : 'warn');
+        document.getElementById('riskDefame').textContent = statuses.defame;
+        document.getElementById('riskDefame').className = 'status ' + (statuses.defame === 'OK' ? 'ok' : 'warn');
+        document.getElementById('riskFact').textContent = statuses.fact;
+        document.getElementById('riskFact').className = 'status ' + (statuses.fact === 'OK' ? 'ok' : 'warn');
+      }
+
+      async function summarize(){
+        const text = document.getElementById('articleBody').value.trim();
+        if(!text){ alert('本文が空です'); return; }
+        const prompt = '次の文章を要点を押さえて要約してください。できるだけ簡潔に、5行以内で。\n\n' + text;
+        try {
+          const result = await callOllama(prompt);
+          document.getElementById('summaryBox').value = result;
+        } catch (e) {
+          document.getElementById('summaryBox').value = '要約の生成に失敗しました: ' + e.message;
+        }
+      }
+
+      saveEndpointBtn.addEventListener('click', saveEndpoint);
+      checkEndpointBtn.addEventListener('click', checkEndpoint);
+      applyTemplateBtn.addEventListener('click', () => {
+        const id = templateSelect.value;
+        if(!id){ alert('テンプレートを選択してください'); return; }
+        const templates = loadLS(LS_KEYS.TEMPLATES) || DEFAULT_TEMPLATES;
+        const t = templates.find(x => x.id === id);
+        if(t) aiPrompt.value = t.text;
+      });
+
+      openTplEditorBtn.addEventListener('click', () => {
+        const templates = loadLS(LS_KEYS.TEMPLATES) || DEFAULT_TEMPLATES;
+        const raw = prompt('テンプレート JSON を編集してください（配列形式）', JSON.stringify(templates, null, 2));
+        if(!raw) return;
+        try {
+          const parsed = JSON.parse(raw);
+          if(!Array.isArray(parsed)) throw new Error('配列形式ではありません');
+          saveLS(LS_KEYS.TEMPLATES, parsed);
+          loadTemplates();
+          alert('テンプレートを保存しました');
+        } catch (e) {
+          alert('JSON エラー: ' + e.message);
+        }
+      });
+
+      runAiBtn.addEventListener('click', async () => {
+        const prompt = aiPrompt.value.trim();
+        if(!prompt){ aiResult.textContent = '入力内容を入れてください。'; return; }
+        runAiBtn.disabled = true; runAiBtn.textContent = '生成中...';
+        aiResult.textContent = '生成中...';
+        try {
+          const result = await callOllama(prompt);
+          aiResult.textContent = result || '(空の応答)';
+          saveHistoryEntry({ id: uid(), prompt, result: result || '', ts: Date.now() });
+        } catch (e) {
+          aiResult.textContent = 'エラー: ' + e.message + '\n\nOllama が起動しているか、エンドポイントを確認してください。';
+        } finally {
+          runAiBtn.disabled = false; runAiBtn.textContent = 'AI生成';
+        }
+      });
+
+      insertBtn.addEventListener('click', () => insertToArticle(aiResult.textContent || ''));
+      copyBtn.addEventListener('click', () => {
+        const txt = aiResult.textContent || '';
+        if(!txt){ alert('コピーする結果がありません'); return; }
+        navigator.clipboard && navigator.clipboard.writeText(txt).then(() => alert('コピーしました')).catch(() => alert('コピーに失敗しました'));
+      });
+      clearHistoryBtn.addEventListener('click', clearHistory);
+      exportHistoryBtn.addEventListener('click', exportHistory);
+      document.getElementById('saveDraftBtn').addEventListener('click', saveDraft);
+      document.getElementById('copyTextBtn').addEventListener('click', copyText);
+      document.getElementById('checkLawBtn').addEventListener('click', checkLaw);
+      document.getElementById('summarizeBtn').addEventListener('click', summarize);
+
+      loadEndpoint();
+      loadTemplates();
+      loadHistory();
+      loadDraft();
+      checkLaw();
+    })();
+  </script>
+</body>
+</html>
