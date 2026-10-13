@@ -102,39 +102,156 @@
 <script>
 const KEY='ark_go_v3_state';
 const defaultState={plans:[{title:'今日の季節・記念日雑学 🍂',date:'',status:'企画中',note:'公式情報を確認し、読んだ人が誰かに話したくなる切り口にする。'},{title:'宇宙・望遠鏡から広がる発見 🔭',date:'',status:'企画中',note:'過去の天体記事へ自然につなぐ。'},{title:'暮らしに役立つ小さな工夫 ☕',date:'',status:'企画中',note:'初心者にも読みやすく、押しつけない語り口にする。'}],metrics:[],articleCount:18,likes:27,legal:{},draft:{title:'',body:'',headerIdea:''}};
-let state=loadState();
-function loadState(){try{return {...structuredClone(defaultState),...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){return structuredClone(defaultState)}}
-function persist(){localStorage.setItem(KEY,JSON.stringify(state));renderDashboard();}
-function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+function safeStructuredClone(value){
+  if (typeof structuredClone === 'function') {
+    try { return structuredClone(value); } catch (e) {}
+  }
+  try { return JSON.parse(JSON.stringify(value)); } catch (e) { return value; }
+}
+
+function loadState(){
+  try {
+    const raw = localStorage.getItem(KEY) || '{}';
+    const parsed = JSON.parse(raw);
+    return { ...safeStructuredClone(defaultState), ...parsed };
+  } catch (e) {
+    return safeStructuredClone(defaultState);
+  }
+}
+
+let state = loadState();
+
+function persist(){
+  try {
+    localStorage.setItem(KEY, JSON.stringify(state));
+  } catch (e) {
+    console.warn('localStorage save failed', e);
+  }
+  renderDashboard();
+}
+
+function esc(s){return String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]))}
 function setView(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));}
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.goto)));
-function renderPlans(){const host=document.getElementById('postList');host.innerHTML=state.plans.map((p,i)=>`<div class="post"><div class="posthead"><div class="posttitle">${esc(p.title||`タイトル ${i+1}`)}</div><span class="muted">${esc(p.status||'企画中')}</span></div><div class="row" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px;"><div><label>日付</label><input data-plan-field="date" data-plan-index="${i}" value="${esc(p.date||'')}" placeholder="例: 10/20"></div><div><label>ステータス</label><select data-plan-field="status" data-plan-index="${i}"><option value="企画中" ${p.status==='企画中'?'selected':''}>企画中</option><option value="執筆中" ${p.status==='執筆中'?'selected':''}>執筆中</option><option value="校正中" ${p.status==='校正中'?'selected':''}>校正中</option><option value="公開予定" ${p.status==='公開予定'?'selected':''}>公開予定</option></select></div><div><label>タイトル</label><input data-plan-field="title" data-plan-index="${i}" value="${esc(p.title||'')}" placeholder="例: 〇〇の雑学"></div></div><div style="margin-top:8px"><label>メモ</label><textarea data-plan-field="note" data-plan-index="${i}" placeholder="要点・方向性・注意点">${esc(p.note||'')}</textarea></div></div>`).join('');const done=state.plans.filter(p=>['執筆中','校正中','公開予定'].includes(p.status)).length;const total=state.plans.length;document.getElementById('planCount').textContent=`${done} / ${total} 件`;document.getElementById('planBar').style.width=`${(done/Math.max(total,1))*100}%`;}
-function renderDashboard(){const latest=state.metrics?.[0];document.getElementById('dArticles').textContent=state.articleCount??18;document.getElementById('dImpressions').textContent=latest?Number(latest.impressions||0).toLocaleString('ja-JP'):'—';document.getElementById('dViews').textContent=latest?Number(latest.views||0).toLocaleString('ja-JP'):'—';document.getElementById('dLikes').textContent=state.likes??27;const done=state.plans.filter(p=>['執筆中','校正中','公開予定'].includes(p.status)).length;const total=state.plans.length;document.getElementById('nextActions').innerHTML=`<div class="notice">今週の重点: ${done}/${total} 件が進行中。公開前の法務とタイトルの再確認を行うと効果が出やすいです。</div>`;}
-function updateCount(){const t=document.getElementById('articleBody').value;document.getElementById('charCount').textContent=t.length.toLocaleString('ja-JP');const minutes=Math.max(1,Math.ceil(t.length/500));document.getElementById('readMinutes').textContent=String(minutes);state.draft={title:document.getElementById('articleTitle').value,body:document.getElementById('articleBody').value,headerIdea:document.getElementById('headerIdea').value};persist();}
-['articleTitle','articleBody','headerIdea'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{updateCount();}));
-function draftText(){return document.getElementById('articleTitle').value+'\n\n'+document.getElementById('articleBody').value}
-async function copyText(text){try{await navigator.clipboard.writeText(text);alert('コピーしました ✅')}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();alert('コピーしました ✅')}}
-document.getElementById('copyArticle').onclick=()=>copyText(draftText());document.getElementById('copyImageIdea').onclick=()=>copyText(document.getElementById('headerIdea').value);document.getElementById('saveDraft').onclick=()=>{state.draft={title:document.getElementById('articleTitle').value,body:document.getElementById('articleBody').value,headerIdea:document.getElementById('headerIdea').value};persist();alert('下書きを保存しました');};document.getElementById('exportDraft').onclick=()=>{const content=(document.getElementById('articleTitle').value?document.getElementById('articleTitle').value+'\n\n':'')+document.getElementById('articleBody').value;download('ARK_GO_draft.txt',content,'text/plain');};
-function renderMetrics(){const host=document.getElementById('metricsTable');if(!state.metrics.length){host.innerHTML='<div class="empty">まだ実績がありません。上のフォームから保存してください。</div>';return;}const rows=state.metrics.map(m=>`<div class="post"><div class="posthead"><div class="posttitle">${esc(m.date||'日付なし')}</div><span class="muted">売上 ${Number(m.sales||0).toLocaleString()}円</span></div><div class="muted" style="margin-top:8px">インプレッション ${Number(m.impressions||0).toLocaleString()} / PV ${Number(m.views||0).toLocaleString()} / スキ ${Number(m.likes||0).toLocaleString()} / 記事数 ${Number(m.articles||0).toLocaleString()}</div></div>`).join('');host.innerHTML=rows;let avg=0;if(state.metrics.length){const total=state.metrics.reduce((sum,m)=>sum+Number(m.views||0),0);avg=total/state.metrics.length;}document.getElementById('analysisNotes').innerHTML=`実績の平均PV: <b>${avg.toLocaleString('ja-JP')}</b>。改善の方向性としては、導入文の強さと見出しの明確さを見直すと伸びやすいです。`}
-document.getElementById('saveMetrics').onclick=()=>{const m={date:document.getElementById('metricDate').value.trim()||new Date().toLocaleDateString('ja-JP'),impressions:Number(document.getElementById('metricImpressions').value||0),views:Number(document.getElementById('metricViews').value||0),likes:Number(document.getElementById('metricLikes').value||0),articles:Number(document.getElementById('metricArticles').value||0),sales:Number(document.getElementById('metricSales').value||0)};state.metrics=[m,...(state.metrics||[])];persist();renderMetrics();alert('実績を保存しました');};
-document.getElementById('resetMetrics').onclick=()=>['metricDate','metricImpressions','metricViews','metricLikes','metricArticles','metricSales'].forEach(id=>document.getElementById(id).value='');document.getElementById('clearMetrics').onclick=()=>{if(confirm('実績履歴をすべて削除しますか？')){state.metrics=[];persist();renderMetrics();}};
-document.getElementById('exportCsv').onclick=()=>{const rows=[['date','impressions','views','likes','articles','sales'],...state.metrics.map(m=>[m.date,m.impressions,m.views,m.likes,m.articles,m.sales])];const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/\"/g,'\"\"')}"`).join(',')).join('\n');download('ARK_GO_metrics.csv',csv,'text/csv');};
-function legalSync(){document.querySelectorAll('[data-legal]').forEach(el=>el.checked=!!state.legal[el.dataset.legal]);const count=Object.values(state.legal).filter(Boolean).length;const total=document.querySelectorAll('[data-legal]').length;document.getElementById('legalStatus').textContent=`${count} / ${total} 項目確認済み`}
-document.querySelectorAll('[data-legal]').forEach(el=>el.addEventListener('change',()=>{state.legal[el.dataset.legal]=el.checked;persist();legalSync()}));
-document.getElementById('saveLegal').onclick=()=>{persist();legalSync();alert('法務チェックを保存しました');};
-document.getElementById('resetLegal').onclick=()=>{state.legal={};persist();legalSync();};
+
+function renderPlans(){
+  const host=document.getElementById('postList');
+  if(!host) return;
+  host.innerHTML=Array.isArray(state.plans) ? state.plans.map((p,i)=>`<div class="post"><div class="posthead"><div class="posttitle">${esc(p.title||`タイトル ${i+1}`)}</div><span class="muted">${esc(p.status||'企画中')}</span></div><div class="row" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px;"><div><label>日付</label><input data-plan-field="date" data-plan-index="${i}" value="${esc(p.date||'')}" placeholder="例: 10/20"></div><div><label>ステータス</label><select data-plan-field="status" data-plan-index="${i}"><option value="企画中" ${p.status==='企画中'?'selected':''}>企画中</option><option value="執筆中" ${p.status==='執筆中'?'selected':''}>執筆中</option><option value="校正中" ${p.status==='校正中'?'selected':''}>校正中</option><option value="公開予定" ${p.status==='公開予定'?'selected':''}>公開予定</option></select></div><div><label>タイトル</label><input data-plan-field="title" data-plan-index="${i}" value="${esc(p.title||'')}" placeholder="例: 〇〇の雑学"></div></div><div style="margin-top:8px"><label>メモ</label><textarea data-plan-field="note" data-plan-index="${i}" placeholder="要点・方向性・注意点">${esc(p.note||'')}</textarea></div></div>`).join('') : '<div class="empty">予定がありません</div>';
+  const done=(Array.isArray(state.plans)?state.plans:[]).filter(p=>['執筆中','校正中','公開予定'].includes(p.status)).length;
+  const total=Array.isArray(state.plans)?state.plans.length:0;
+  const planCount=document.getElementById('planCount');
+  const planBar=document.getElementById('planBar');
+  if(planCount) planCount.textContent=`${done} / ${total} 件`;
+  if(planBar) planBar.style.width=`${total ? (done/total)*100 : 0}%`;
+}
+
+function renderDashboard(){
+  const latest = Array.isArray(state.metrics) && state.metrics.length ? state.metrics[0] : null;
+  const dArticles=document.getElementById('dArticles');
+  const dImpressions=document.getElementById('dImpressions');
+  const dViews=document.getElementById('dViews');
+  const dLikes=document.getElementById('dLikes');
+  if(dArticles) dArticles.textContent = Number(state.articleCount ?? 18).toLocaleString('ja-JP');
+  if(dImpressions) dImpressions.textContent = latest ? Number(latest.impressions || 0).toLocaleString('ja-JP') : '—';
+  if(dViews) dViews.textContent = latest ? Number(latest.views || 0).toLocaleString('ja-JP') : '—';
+  if(dLikes) dLikes.textContent = Number(state.likes ?? 27).toLocaleString('ja-JP');
+  const done=(Array.isArray(state.plans)?state.plans:[]).filter(p=>['執筆中','校正中','公開予定'].includes(p.status)).length;
+  const total=Array.isArray(state.plans)?state.plans.length:0;
+  const nextActions=document.getElementById('nextActions');
+  if(nextActions) nextActions.innerHTML=`<div class="notice">今週の重点: ${done}/${total} 件が進行中。公開前の法務とタイトルの再確認を行うと効果が出やすいです。</div>`;
+}
+
+function updateCount(){
+  const bodyEl=document.getElementById('articleBody');
+  if(!bodyEl) return;
+  const t=bodyEl.value;
+  const cEl=document.getElementById('charCount');
+  const mEl=document.getElementById('readMinutes');
+  if(cEl) cEl.textContent=t.length.toLocaleString('ja-JP');
+  const minutes=Math.max(1,Math.ceil(t.length/500));
+  if(mEl) mEl.textContent=String(minutes);
+  state.draft={
+    title: document.getElementById('articleTitle')?.value || '',
+    body: bodyEl.value,
+    headerIdea: document.getElementById('headerIdea')?.value || ''
+  };
+}
+
+['articleTitle','articleBody','headerIdea'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el) el.addEventListener('input',updateCount);
+});
+
+function draftText(){return (document.getElementById('articleTitle')?.value||'')+'\n\n'+(document.getElementById('articleBody')?.value||'')}
+async function copyText(text){
+  try { await navigator.clipboard.writeText(text); alert('コピーしました ✅'); }
+  catch(e){
+    const ta=document.createElement('textarea');
+    ta.value=text; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); alert('コピーしました ✅'); }
+    catch(_) { alert('コピーできませんでした'); }
+    ta.remove();
+  }
+}
+document.getElementById('copyArticle')?.addEventListener('click',()=>copyText(draftText()));
+document.getElementById('copyImageIdea')?.addEventListener('click',()=>copyText(document.getElementById('headerIdea')?.value || ''));
+document.getElementById('saveDraft')?.addEventListener('click',()=>{state.draft={title:document.getElementById('articleTitle')?.value||'',body:document.getElementById('articleBody')?.value||'',headerIdea:document.getElementById('headerIdea')?.value||''};persist();alert('下書きを保存しました');});
+document.getElementById('exportDraft')?.addEventListener('click',()=>{const content=(document.getElementById('articleTitle')?.value ? document.getElementById('articleTitle').value+'\n\n' : '') + (document.getElementById('articleBody')?.value || ''); download('ARK_GO_draft.txt',content,'text/plain');});
+
+function renderMetrics(){
+  const host=document.getElementById('metricsTable');
+  if(!host) return;
+  if(!Array.isArray(state.metrics) || !state.metrics.length){host.innerHTML='<div class="empty">まだ実績がありません。上のフォームから保存してください。</div>';return;}
+  const rows=state.metrics.map(m=>`<div class="post"><div class="posthead"><div class="posttitle">${esc(m.date||'日付なし')}</div><span class="muted">売上 ${Number(m.sales||0).toLocaleString()}円</span></div><div class="muted" style="margin-top:8px">インプレッション ${Number(m.impressions||0).toLocaleString()} / PV ${Number(m.views||0).toLocaleString()} / スキ ${Number(m.likes||0).toLocaleString()} / 記事数 ${Number(m.articles||0).toLocaleString()}</div></div>`).join('');
+  host.innerHTML=rows;
+  let avg=0;
+  if(state.metrics.length){
+    const total=state.metrics.reduce((sum,m)=>sum+Number(m.views||0),0);
+    avg=total/state.metrics.length;
+  }
+  const notes=document.getElementById('analysisNotes');
+  if(notes) notes.innerHTML=`実績の平均PV: <b>${avg.toLocaleString('ja-JP')}</b>。改善の方向性としては、導入文の強さと見出しの明確さを見直すと伸びやすいです。`;
+}
+
+document.getElementById('saveMetrics')?.addEventListener('click',()=>{const m={date:document.getElementById('metricDate')?.value.trim()||new Date().toLocaleDateString('ja-JP'),impressions:Number(document.getElementById('metricImpressions')?.value||0),views:Number(document.getElementById('metricViews')?.value||0),likes:Number(document.getElementById('metricLikes')?.value||0),articles:Number(document.getElementById('metricArticles')?.value||0),sales:Number(document.getElementById('metricSales')?.value||0)};state.metrics=[m,...(Array.isArray(state.metrics)?state.metrics:[])];persist();renderMetrics();alert('実績を保存しました');});
+document.getElementById('resetMetrics')?.addEventListener('click',()=>['metricDate','metricImpressions','metricViews','metricLikes','metricArticles','metricSales'].forEach(id=>{const el=document.getElementById(id);if(el) el.value='';}));
+document.getElementById('clearMetrics')?.addEventListener('click',()=>{if(confirm('実績履歴をすべて削除しますか？')){state.metrics=[];persist();renderMetrics();}});
+document.getElementById('exportCsv')?.addEventListener('click',()=>{const rows=[['date','impressions','views','likes','articles','sales'],...state.metrics.map(m=>[m.date,m.impressions,m.views,m.likes,m.articles,m.sales])];const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/\"/g,'\"\"')}"`).join(',')).join('\n');download('ARK_GO_metrics.csv',csv,'text/csv');});
+
+function legalSync(){
+  document.querySelectorAll('[data-legal]').forEach(el=>el.checked=!!state.legal[el.dataset.legal]);
+  const count=Object.values(state.legal||{}).filter(Boolean).length;
+  const total=document.querySelectorAll('[data-legal]').length;
+  const legalStatus=document.getElementById('legalStatus');
+  if(legalStatus) legalStatus.textContent=`${count} / ${total} 項目確認済み`;
+}
+
+document.querySelectorAll('[data-legal]').forEach(el=>el.addEventListener('change',()=>{state.legal[el.dataset.legal]=el.checked;persist();legalSync();}));
+document.getElementById('saveLegal')?.addEventListener('click',()=>{persist();legalSync();alert('法務チェックを保存しました');});
+document.getElementById('resetLegal')?.addEventListener('click',()=>{state.legal={};persist();legalSync();});
+
 function download(name,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
-document.getElementById('exportTop').onclick=()=>download('ARK_GO_backup.json',JSON.stringify(state,null,2),'application/json');
-document.getElementById('exportAll').onclick=()=>download('ARK_GO_backup.json',JSON.stringify(state,null,2),'application/json');
-document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();
-document.getElementById('importFile').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const json=JSON.parse(await file.text());state={...defaultState,...json};persist();renderPlans();renderMetrics();legalSync();alert('バックアップを読み込みました');}catch(err){alert('バックアップの読み込みに失敗しました');}finally{e.target.value='';}};
-document.getElementById('savePlans').onclick=()=>{persist();renderPlans();alert('投稿予定を保存しました');};
-document.getElementById('clearPlans').onclick=()=>{if(confirm('投稿予定を初期案に戻しますか？')){state.plans=structuredClone(defaultState.plans);persist();renderPlans();}};
-document.querySelectorAll('[data-plan-field]').forEach(el=>el.addEventListener('input',()=>{const idx=Number(el.dataset.planIndex);const field=el.dataset.planField;state.plans[idx]=state.plans[idx]||{title:'',date:'',status:'企画中',note:''};state.plans[idx][field]=el.value;persist();renderPlans();}));
-document.getElementById('quickNew').onclick=()=>setView('editor');
-function makeTrendPrompt(){const topic=document.getElementById('trendTopic')?.value||'季節の話題';const goal=document.getElementById('trendGoal')?.value||'読者に役立つ無料note';const prompt=`以下の条件で、noteに関する調査依頼文を作ってください。\n- 目的: ${goal}\n- トピック: ${topic}\n- 出力形式: 1) 背景 2) 具体的な調査観点 3) 記事案 4) 収益化の可能性\n- 文章は簡潔で実務に使える形にする`;document.getElementById('trendPrompt').value=prompt;}
-const trendAnchor=document.createElement('div');trendAnchor.style.display='none';const trendTopicInput=document.createElement('input');trendTopicInput.id='trendTopic';trendTopicInput.value='季節の話題';const trendGoalInput=document.createElement('input');trendGoalInput.id='trendGoal';trendGoalInput.value='読者に役立つ無料note';trendAnchor.appendChild(trendTopicInput);trendAnchor.appendChild(trendGoalInput);document.body.appendChild(trendAnchor);document.getElementById('makeTrendPrompt').onclick=()=>makeTrendPrompt();document.getElementById('copyTrendPrompt').onclick=()=>copyText(document.getElementById('trendPrompt').value);
+document.getElementById('exportTop')?.addEventListener('click',()=>download('ARK_GO_backup.json',JSON.stringify(state,null,2),'application/json'));
+document.getElementById('exportAll')?.addEventListener('click',()=>download('ARK_GO_backup.json',JSON.stringify(state,null,2),'application/json'));
+document.getElementById('importBtn')?.addEventListener('click',()=>document.getElementById('importFile')?.click());
+document.getElementById('importFile')?.addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{const json=JSON.parse(await file.text());state={...safeStructuredClone(defaultState),...json};persist();renderPlans();renderMetrics();legalSync();alert('バックアップを読み込みました');}catch(err){alert('バックアップの読み込みに失敗しました');}finally{e.target.value='';}});
+document.getElementById('savePlans')?.addEventListener('click',()=>{persist();renderPlans();alert('投稿予定を保存しました');});
+document.getElementById('clearPlans')?.addEventListener('click',()=>{if(confirm('投稿予定を初期案に戻しますか？')){state.plans=safeStructuredClone(defaultState.plans);persist();renderPlans();}});
+document.querySelectorAll('[data-plan-field]').forEach(el=>el.addEventListener('input',()=>{const idx=Number(el.dataset.planIndex);const field=el.dataset.planField;if(!Array.isArray(state.plans)) state.plans=[];state.plans[idx]=state.plans[idx]||{title:'',date:'',status:'企画中',note:''};state.plans[idx][field]=el.value;persist();renderPlans();}));
+document.getElementById('quickNew')?.addEventListener('click',()=>setView('editor'));
+
+function makeTrendPrompt(){
+  const topic=document.getElementById('trendTopic')?.value||'季節の話題';
+  const goal=document.getElementById('trendGoal')?.value||'読者に役立つ無料note';
+  const prompt=`以下の条件で、noteに関する調査依頼文を作ってください。\n- 目的: ${goal}\n- トピック: ${topic}\n- 出力形式: 1) 背景 2) 具体的な調査観点 3) 記事案 4) 収益化の可能性\n- 文章は簡潔で実務に使える形にする`;
+  const trendPrompt=document.getElementById('trendPrompt');
+  if(trendPrompt) trendPrompt.value=prompt;
+}
+const trendAnchor=document.createElement('div');trendAnchor.style.display='none';const trendTopicInput=document.createElement('input');trendTopicInput.id='trendTopic';trendTopicInput.value='季節の話題';const trendGoalInput=document.createElement('input');trendGoalInput.id='trendGoal';trendGoalInput.value='読者に役立つ無料note';trendAnchor.appendChild(trendTopicInput);trendAnchor.appendChild(trendGoalInput);document.body.appendChild(trendAnchor);document.getElementById('makeTrendPrompt')?.addEventListener('click',makeTrendPrompt);document.getElementById('copyTrendPrompt')?.addEventListener('click',()=>copyText(document.getElementById('trendPrompt')?.value||''));
+
 async function fetchPublicReadme(owner, repo) {const res=await fetch(`https://api.github.com/repos/${owner}/${repo}/readme`);if(!res.ok) throw new Error('README not found');const data=await res.json();return atob(data.content.replace(/\n/g,''));}
 async function askOllama(prompt){const res=await fetch('http://localhost:11434/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'llama3.2',prompt,stream:false})});if(!res.ok) throw new Error('Ollama request failed');const data=await res.json();return data.response;}
 function saveIdea(resultText){const saved=JSON.parse(localStorage.getItem('ark_idea_cache')||'[]');saved.push({createdAt:new Date().toISOString(),result:resultText});localStorage.setItem('ark_idea_cache',JSON.stringify(saved));}
@@ -157,7 +274,11 @@ async function generateArkIdea(){
 }
 function initArkAutoIdea(){const container=document.createElement('div');container.style.marginTop='20px';container.style.padding='16px';container.style.border='1px solid #dde5f0';container.style.borderRadius='14px';container.style.background='#f8fafc';const title=document.createElement('div');title.textContent='AI企画室（無料版）';title.style.fontWeight='700';title.style.marginBottom='10px';const button=document.createElement('button');button.textContent='AI記事候補を自動生成';button.className='btn';button.onclick=generateArkIdea;const output=document.createElement('pre');output.id='aiIdeaOutput';output.style.whiteSpace='pre-wrap';output.style.fontSize='14px';output.style.lineHeight='1.6';output.style.marginTop='12px';output.style.background='#fff';output.style.padding='12px';output.style.borderRadius='10px';output.style.border='1px solid #e5e7eb';container.appendChild(title);container.appendChild(button);container.appendChild(output);const app=document.querySelector('.app')||document.body;app.appendChild(container);const cached=JSON.parse(localStorage.getItem('ark_idea_cache')||'[]');if(cached.length){output.innerText=cached[cached.length-1].result;}}
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initArkAutoIdea);}else{initArkAutoIdea();}
-state.plans=state.plans||defaultState.plans;state.metrics=state.metrics||[];state.legal=state.legal||{};state.draft=state.draft||{title:'',body:'',headerIdea:''};renderPlans();renderMetrics();legalSync();renderDashboard();updateCount();
+state.plans = Array.isArray(state.plans) ? state.plans : safeStructuredClone(defaultState.plans);
+state.metrics = Array.isArray(state.metrics) ? state.metrics : [];
+state.legal = state.legal && typeof state.legal === 'object' ? state.legal : {};
+state.draft = state.draft && typeof state.draft === 'object' ? state.draft : {title:'',body:'',headerIdea:''};
+renderPlans();renderMetrics();legalSync();renderDashboard();updateCount();
 </script>
 </body>
 </html>
